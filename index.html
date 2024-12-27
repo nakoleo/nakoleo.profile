@@ -6,176 +6,104 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>ART HANDOVER</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* CSS Reset & Base Styles */
+        /* Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
         }
 
         :root {
             --primary-color: #007AFF;
             --success-color: #34C759;
             --background-color: #F2F2F7;
-            --card-background: #FFFFFF;
             --text-primary: #000000;
             --text-secondary: #6C6C6E;
-            --border-color: #E5E5EA;
-            --header-height: 44px;
-            --safe-area-inset-top: env(safe-area-inset-top);
-            --safe-area-inset-bottom: env(safe-area-inset-bottom);
+            --header-height: 50px;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Icons', system-ui, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
             background-color: var(--background-color);
-            color: var(--text-primary);
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-            padding: calc(var(--safe-area-inset-top) + var(--header-height)) 0 var(--safe-area-inset-bottom);
+            padding: var(--header-height) 0;
         }
 
         /* Header */
-        .header {
+        header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            height: calc(var(--header-height) + var(--safe-area-inset-top));
-            background-color: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            z-index: 100;
-            padding-top: var(--safe-area-inset-top);
-            border-bottom: 0.5px solid var(--border-color);
-        }
-
-        .header-content {
+            background: #fff;
             height: var(--header-height);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0 16px;
+            border-bottom: 1px solid #ddd;
+            z-index: 100;
         }
 
-        .header-title {
-            font-size: 17px;
+        header h1 {
+            font-size: 18px;
             font-weight: 600;
-            color: var(--text-primary);
         }
 
-        /* Main Container */
+        /* Content */
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 16px;
         }
 
-        /* Section Cards */
-        .section-card {
-            background: var(--card-background);
-            border-radius: 12px;
-            margin-bottom: 12px;
+        .section {
+            margin-bottom: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         }
 
         .section-header {
-            padding: 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 0.5px solid var(--border-color);
-        }
-
-        .section-icon {
-            width: 28px;
-            height: 28px;
             background: var(--primary-color);
-            border-radius: 7px;
+            color: #fff;
+            padding: 10px 16px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: white;
+            cursor: pointer;
         }
 
-        .section-title {
-            font-size: 17px;
-            font-weight: 600;
-            flex: 1;
+        .section-header i {
+            margin-right: 10px;
         }
 
         .section-content {
             display: none;
-            padding: 0;
+            padding: 10px 16px;
+            background: #fff;
         }
 
-        .section-card.open .section-content {
+        .section.open .section-content {
             display: block;
         }
 
-        /* File Items */
         .file-item {
-            padding: 12px 16px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            border-bottom: 0.5px solid var(--border-color);
-            background: var(--card-background);
+            justify-content: space-between;
+            margin: 10px 0;
         }
 
-        .file-item:last-child {
-            border-bottom: none;
-        }
-
-        .file-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .file-icon.ppt {
-            background: #FF3B30;
-            color: white;
-        }
-
-        .file-info {
-            flex: 1;
-        }
-
-        .file-name {
+        .file-item .file-name {
             font-size: 15px;
-            font-weight: 400;
-            color: var(--text-primary);
-            margin-bottom: 2px;
         }
 
-        .file-date {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .file-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .action-button {
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
+        .file-actions button {
+            padding: 5px 10px;
             border: none;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
         }
 
         .preview-btn {
@@ -188,7 +116,7 @@
             color: white;
         }
 
-        /* Preview Modal */
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -197,303 +125,97 @@
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
             z-index: 1000;
-            padding: calc(var(--safe-area-inset-top) + 20px) 20px var(--safe-area-inset-bottom);
-        }
-
-        .modal-container {
-            background: var(--card-background);
-            border-radius: 12px;
-            overflow: hidden;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            animation: modalSlideUp 0.3s ease-out;
-        }
-
-        .modal-header {
-            height: 44px;
-            border-bottom: 0.5px solid var(--border-color);
-            display: flex;
             align-items: center;
-            padding: 0 16px;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
-        .modal-title {
-            flex: 1;
-            font-size: 17px;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        .modal-close {
-            padding: 8px;
-            margin: -8px;
-            color: var(--primary-color);
-            font-size: 17px;
-            border: none;
-            background: none;
-            cursor: pointer;
+            justify-content: center;
         }
 
         .modal-content {
-            flex: 1;
+            background: #fff;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 8px;
             overflow: hidden;
         }
 
-        .preview-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
+        .modal-header {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 10px;
+            text-align: center;
         }
 
-        @keyframes modalSlideUp {
-            from {
-                transform: translateY(100%);
-            }
-            to {
-                transform: translateY(0);
-            }
+        .modal-body {
+            height: 500px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <h1 class="header-title">ART HANDOVER</h1>
-        </div>
+    <header>
+        <h1>ART HANDOVER</h1>
     </header>
 
-    <!-- Main Container -->
     <div class="container">
-        <!-- A. MARKETING HANDOVER -->
-        <div class="section-card">
-            <div class="section-header">
-                <div class="section-icon">
-                    <i class="fas fa-folder"></i>
-                </div>
-                <h2 class="section-title">A. MARKETING HANDOVER</h2>
-                <i class="fas fa-chevron-right"></i>
+        <!-- Section Example -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <i class="fas fa-folder"></i> A. Marketing Handover
             </div>
             <div class="section-content">
-                <!-- Marketing Documents -->
                 <div class="file-item">
-                    <div class="file-icon ppt">
-                        <i class="fas fa-file-powerpoint"></i>
-                    </div>
-                    <div class="file-info">
-                        <div class="file-name">September 2023</div>
-                        <div class="file-date">Marketing Report</div>
-                    </div>
+                    <span class="file-name">September 2023 - Marketing Report</span>
                     <div class="file-actions">
-                        <button class="action-button preview-btn" onclick="previewFile('1O1FjMGRgrC5UGq6A6cBdTD4vZ9mTD29v4TLvpBatqPE')">
-                            <i class="fas fa-eye"></i>
-                            Preview
-                        </button>
-                        <button class="action-button download-btn" onclick="downloadFile('1O1FjMGRgrC5UGq6A6cBdTD4vZ9mTD29v4TLvpBatqPE')">
-                            <i class="fas fa-download"></i>
-                            Download
-                        </button>
+                        <button class="preview-btn" onclick="previewFile('1O1FjMGRgrC5UGq6A6cBdTD4vZ9mTD29v4TLvpBatqPE')">Preview</button>
+                        <button class="download-btn" onclick="downloadFile('1O1FjMGRgrC5UGq6A6cBdTD4vZ9mTD29v4TLvpBatqPE')">Download</button>
                     </div>
                 </div>
-
-                <div class="file-item">
-                    <div class="file-icon ppt">
-                        <i class="fas fa-file-powerpoint"></i>
-                    </div>
-                    <div class="file-info">
-                        <div class="file-name">October 2023</div>
-                        <div class="file-date">Marketing Report</div>
-                    </div>
-                    <div class="file-actions">
-                        <button class="action-button preview-btn" onclick="previewFile('1wRlNZwLCom9GAobyoATAGe3p-axtpFtYudIY9o04P7M')">
-                            <i class="fas fa-eye"></i>
-                            Preview
-                        </button>
-                        <button class="action-button download-btn" onclick="downloadFile('1wRlNZwLCom9GAobyoATAGe3p-axtpFtYudIY9o04P7M')">
-                            <i class="fas fa-download"></i>
-                            Download
-                        </button>
-                    </div>
-                </div>
-                
-ios-premium-file-structure-2" type="application/vnd.ant.code" title="Premium iOS File Structure - Part 2">
-                <!-- ต่อจากส่วนแรก -->
-                <div class="file-item">
-                    <div class="file-icon ppt">
-                        <i class="fas fa-file-powerpoint"></i>
-                    </div>
-                    <div class="file-info">
-                        <div class="file-name">December 2023</div>
-                        <div class="file-date">Marketing Report</div>
-                    </div>
-                    <div class="file-actions">
-                        <button class="action-button preview-btn" onclick="previewFile('10wyYfqPh-anKnV9BNKc1R6Oi_nVhGxOErPiOaQZb_U8')">
-                            <i class="fas fa-eye"></i>
-                            Preview
-                        </button>
-                        <button class="action-button download-btn" onclick="downloadFile('10wyYfqPh-anKnV9BNKc1R6Oi_nVhGxOErPiOaQZb_U8')">
-                            <i class="fas fa-download"></i>
-                            Download
-                        </button>
-                    </div>
-                </div>
-
-                <div class="file-item">
-                    <div class="file-icon ppt">
-                        <i class="fas fa-file-powerpoint"></i>
-                    </div>
-                    <div class="file-info">
-                        <div class="file-name">January 2024</div>
-                        <div class="file-date">Marketing Report</div>
-                    </div>
-                    <div class="file-actions">
-                        <button class="action-button preview-btn" onclick="previewFile('1RZBceNmt_VFu6t4UghUfmU9THmbvPnwnDcud4v_rfkM')">
-                            <i class="fas fa-eye"></i>
-                            Preview
-                        </button>
-                        <button class="action-button download-btn" onclick="downloadFile('1RZBceNmt_VFu6t4UghUfmU9THmbvPnwnDcud4v_rfkM')">
-                            <i class="fas fa-download"></i>
-                            Download
-                        </button>
-                    </div>
-                </div>
-
-                <div class="file-item">
-                    <div class="file-icon ppt">
-                        <i class="fas fa-file-powerpoint"></i>
-                    </div>
-                    <div class="file-info">
-                        <div class="file-name">February - March 2024</div>
-                        <div class="file-date">Marketing Report</div>
-                    </div>
-                    <div class="file-actions">
-                        <button class="action-button preview-btn" onclick="previewFile('1gIcAR9mDXO07u0h7vppIxYazjT95eVLS7elndn5l_8o')">
-                            <i class="fas fa-eye"></i>
-                            Preview
-                        </button>
-                        <button class="action-button download-btn" onclick="downloadFile('1gIcAR9mDXO07u0h7vppIxYazjT95eVLS7elndn5l_8o')">
-                            <i class="fas fa-download"></i>
-                            Download
-                        </button>
-                    </div>
-                </div>
-
-                <div class="file-item">
-                    <div class="file-icon ppt">
-                        <i class="fas fa-file-powerpoint"></i>
-                    </div>
-                    <div class="file-info">
-                        <div class="file-name">2023 Ads Report</div>
-                        <div class="file-date">Annual Report</div>
-                    </div>
-                    <div class="file-actions">
-                        <button class="action-button preview-btn" onclick="previewFile('1ypdtxu6fo7O1Ztp0YWHcpP3tgwLqxTacZ4tb6qqxOQM')">
-                            <i class="fas fa-eye"></i>
-                            Preview
-                        </button>
-                        <button class="action-button download-btn" onclick="downloadFile('1ypdtxu6fo7O1Ztp0YWHcpP3tgwLqxTacZ4tb6qqxOQM')">
-                            <i class="fas fa-download"></i>
-                            Download
-                        </button>
-                    </div>
-                </div>
+                <!-- Add more file items here -->
             </div>
         </div>
+        <!-- Add more sections here -->
+    </div>
 
-        <!-- B. PROJECTS HANDOVER -->
-        <div class="section-card">
-            <div class="section-header">
-                <div class="section-icon" style="background: #5856D6;">
-                    <i class="fas fa-project-diagram"></i>
-                </div>
-                <h2 class="section-title">B. PROJECTS HANDOVER</h2>
-                <i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="section-content">
-                <!-- Add project files here using the same structure -->
-            </div>
-        </div>
-
-        <!-- C. COMPANY ACCESS -->
-        <div class="section-card">
-            <div class="section-header">
-                <div class="section-icon" style="background: #FF9500;">
-                    <i class="fas fa-key"></i>
-                </div>
-                <h2 class="section-title">C. COMPANY ACCESS</h2>
-                <i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="section-content">
-                <!-- Add access files here using the same structure -->
+    <!-- Modal -->
+    <div class="modal" id="previewModal">
+        <div class="modal-content">
+            <div class="modal-header">File Preview</div>
+            <div class="modal-body">
+                <iframe id="previewFrame"></iframe>
             </div>
         </div>
     </div>
-            </div>
-        </div>
-
-        <!-- Preview Modal -->
-        <div id="previewModal" class="modal">
-            <div class="modal-container">
-                <div class="modal-header">
-                    <button class="modal-close" onclick="closePreview()">Close</button>
-                    <div class="modal-title">File Preview</div>
-                    <div style="width: 40px;"></div>
-                </div>
-                <div class="modal-content">
-                    <iframe id="previewFrame" class="preview-iframe" allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <script>
-        // Toggle sections
-        document.querySelectorAll('.section-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const section = header.closest('.section-card');
-                section.classList.toggle('open');
-            });
-        });
+        // Toggle section
+        function toggleSection(header) {
+            header.closest('.section').classList.toggle('open');
+        }
 
-        // Preview function
+        // Preview file
         function previewFile(fileId) {
             const modal = document.getElementById('previewModal');
             const iframe = document.getElementById('previewFrame');
             iframe.src = `https://drive.google.com/file/d/${fileId}/preview`;
             modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
         }
 
-        // Download function
+        // Close modal
+        document.getElementById('previewModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+                document.getElementById('previewFrame').src = '';
+            }
+        });
+
+        // Download file
         function downloadFile(fileId) {
             window.open(`https://drive.google.com/uc?export=download&id=${fileId}`, '_blank');
         }
-
-        // Close preview
-        function closePreview() {
-            const modal = document.getElementById('previewModal');
-            const iframe = document.getElementById('previewFrame');
-            modal.style.display = 'none';
-            iframe.src = '';
-            document.body.style.overflow = '';
-        }
-
-        // Close modal on outside click
-        document.getElementById('previewModal').addEventListener('click', (e) => {
-            if (e.target === e.currentTarget) {
-                closePreview();
-            }
-        });
     </script>
 </body>
 </html>
