@@ -1,134 +1,37 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ART HANDOVER</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* Your existing styles */
+        /* ... (รวมทั้ง CSS ที่คุณมีอยู่) ... */
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #f2f2f7;
-            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 28px;
-            color: #1d1d1f;
-            margin: 20px 0 30px;
-        }
-
-        .folder {
-            background: white;
-            border-radius: 12px;
-            margin: 10px 0;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .folder-header {
-            display: flex;
-            align-items: center;
-            padding: 15px 20px;
-            cursor: pointer;
-            user-select: none;
-            gap: 12px;
-        }
-
-        .folder-icon {
-            width: 24px;
-            height: 24px;
-            color: #007AFF;
-        }
-
-        .folder-title {
-            flex: 1;
-            font-size: 17px;
-            color: #007AFF;
-            font-weight: 500;
-        }
-
-        .folder-arrow {
-            width: 20px;
-            height: 20px;
-            transition: transform 0.3s;
-        }
-
-        .folder.open .folder-arrow {
-            transform: rotate(180deg);
-        }
-
-        .folder-content {
-            display: none;
-            padding: 0 20px 15px 56px;
-        }
-
-        .folder.open .folder-content {
-            display: block;
-        }
-
-        .file {
-            background: #f8f8fa;
-            border-radius: 8px;
-            padding: 12px 15px;
-            margin: 8px 0;
-        }
-
-        .file-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .file-icon {
-            width: 20px;
-            height: 20px;
-        }
-
-        .file-title {
-            font-size: 15px;
-            color: #1d1d1f;
-        }
-
-        .file-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .btn {
-            padding: 8px 16px;
-            border-radius: 8px;
-            border: none;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: opacity 0.2s;
+        /* เพิ่มสไตล์สำหรับ preview/download */
+        .preview-btn, .download-btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin: 0 5px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            text-decoration: none;
             color: white;
-        }
-
-        .btn:active {
-            opacity: 0.8;
+            cursor: pointer;
         }
 
         .preview-btn {
-            background: #007AFF;
+            background: #007aff;
         }
 
         .download-btn {
-            background: #34C759;
+            background: #34c759;
+        }
+
+        .file-actions {
+            margin-left: 20px;
+            display: inline-block;
         }
 
         #previewModal {
@@ -138,7 +41,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.8);
             z-index: 1000;
         }
 
@@ -148,165 +51,141 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background: white;
+            padding: 20px;
+            border-radius: 12px;
             width: 90%;
             max-width: 800px;
-            max-height: 90vh;
-            border-radius: 12px;
-            overflow: hidden;
+            height: 90vh;
         }
 
-        .modal-header {
-            padding: 15px 20px;
-            border-bottom: 1px solid #e5e5ea;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .modal-title {
-            font-size: 17px;
-            font-weight: 600;
+        .modal-iframe {
+            width: 100%;
+            height: calc(100% - 40px);
+            border: none;
         }
 
         .close-modal {
-            background: none;
-            border: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
             font-size: 24px;
-            color: #8e8e93;
             cursor: pointer;
-        }
-
-        .modal-body {
-            padding: 20px;
-            overflow-y: auto;
-            max-height: calc(90vh - 60px);
-        }
-
-        iframe {
-            width: 100%;
-            height: 80vh;
-            border: none;
+            color: #666;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>ART HANDOVER</h1>
-        
-        <!-- A. MARKETING HANDOVER -->
-        <div class="folder">
-            <div class="folder-header">
-                <svg class="folder-icon" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/>
-                </svg>
-                <div class="folder-title">A. MARKETING HANDOVER</div>
-                <svg class="folder-arrow" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M7 10l5 5 5-5z"/>
-                </svg>
-            </div>
-            <div class="folder-content">
-                <!-- Monthly Reports -->
-                <div class="folder">
-                    <div class="folder-header">
-                        <svg class="folder-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/>
-                        </svg>
-                        <div class="folder-title">Monthly Reports</div>
-                        <svg class="folder-arrow" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M7 10l5 5 5-5z"/>
-                        </svg>
-                    </div>
-                    <div class="folder-content">
-                        <div class="file">
-                            <div class="file-header">
-                                <svg class="file-icon" viewBox="0 0 24 24" fill="#FF3B30">
-                                    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2z"/>
-                                </svg>
-                                <div class="file-title">SUC Monthly Report 2024</div>
-                            </div>
-                            <div class="file-actions">
-                                <button class="btn preview-btn" onclick="previewFile('https://drive.google.com/file/d/1zT60tgSHY-oNTn3KPuiA1iRzbf8ORQXI/preview')">Preview</button>
-                                <button class="btn download-btn" onclick="downloadFile('https://drive.google.com/uc?export=download&id=1zT60tgSHY-oNTn3KPuiA1iRzbf8ORQXI')">Download</button>
-                            </div>
-                        </div>
-                        <div class="file">
-                            <div class="file-header">
-                                <svg class="file-icon" viewBox="0 0 24 24" fill="#FF3B30">
-                                    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2z"/>
-                                </svg>
-                                <div class="file-title">TSD Monthly Report 2024</div>
-                            </div>
-                            <div class="file-actions">
-                                <button class="btn preview-btn" onclick="previewFile('path_to_tsd_report')">Preview</button>
-                                <button class="btn download-btn" onclick="downloadFile('path_to_tsd_report')">Download</button>
-                            </div>
-                        </div>
-                        <!-- Add more reports -->
-                    </div>
-                </div>
+    <h1>ART HANDOVER</h1>
+    <div class="tree-container">
+        <ul class="tree">
+            <!-- A. MARKETING HANDOVER -->
+            <li>
+                <i class="fas fa-folder toggle-icon"></i>
+                <strong>A. MARKETING HANDOVER</strong>
+                <ul>
+                    <!-- Monthly Reports -->
+                    <li>
+                        <i class="fas fa-folder toggle-icon"></i>
+                        Marketing Documents
+                        <ul>
+                            <li>
+                                <i class="fas fa-file-powerpoint"></i>
+                                September 2023
+                                <div class="file-actions">
+                                    <a class="preview-btn" onclick="previewFile('1O1FjMGRgrC5UGq6A6cBdTD4vZ9mTD29v4TLvpBatqPE')">Preview</a>
+                                    <a class="download-btn" onclick="downloadFile('1O1FjMGRgrC5UGq6A6cBdTD4vZ9mTD29v4TLvpBatqPE')">Download</a>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-file-powerpoint"></i>
+                                October 2023
+                                <div class="file-actions">
+                                    <a class="preview-btn" onclick="previewFile('1wRlNZwLCom9GAobyoATAGe3p-axtpFtYudIY9o04P7M')">Preview</a>
+                                    <a class="download-btn" onclick="downloadFile('1wRlNZwLCom9GAobyoATAGe3p-axtpFtYudIY9o04P7M')">Download</a>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-file-powerpoint"></i>
+                                December 2023
+                                <div class="file-actions">
+                                    <a class="preview-btn" onclick="previewFile('10wyYfqPh-anKnV9BNKc1R6Oi_nVhGxOErPiOaQZb_U8')">Preview</a>
+                                    <a class="download-btn" onclick="downloadFile('10wyYfqPh-anKnV9BNKc1R6Oi_nVhGxOErPiOaQZb_U8')">Download</a>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-file-powerpoint"></i>
+                                January 2024
+                                <div class="file-actions">
+                                    <a class="preview-btn" onclick="previewFile('1RZBceNmt_VFu6t4UghUfmU9THmbvPnwnDcud4v_rfkM')">Preview</a>
+                                    <a class="download-btn" onclick="downloadFile('1RZBceNmt_VFu6t4UghUfmU9THmbvPnwnDcud4v_rfkM')">Download</a>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-file-powerpoint"></i>
+                                February - March 2024
+                                <div class="file-actions">
+                                    <a class="preview-btn" onclick="previewFile('1gIcAR9mDXO07u0h7vppIxYazjT95eVLS7elndn5l_8o')">Preview</a>
+                                    <a class="download-btn" onclick="downloadFile('1gIcAR9mDXO07u0h7vppIxYazjT95eVLS7elndn5l_8o')">Download</a>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-file-powerpoint"></i>
+                                2023 Ads Report
+                                <div class="file-actions">
+                                    <a class="preview-btn" onclick="previewFile('1ypdtxu6fo7O1Ztp0YWHcpP3tgwLqxTacZ4tb6qqxOQM')">Preview</a>
+                                    <a class="download-btn" onclick="downloadFile('1ypdtxu6fo7O1Ztp0YWHcpP3tgwLqxTacZ4tb6qqxOQM')">Download</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
 
-                <!-- Content Archives -->
-                <div class="folder">
-                    <div class="folder-header">
-                        <svg class="folder-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/>
-                        </svg>
-                        <div class="folder-title">Content Archives</div>
-                        <svg class="folder-arrow" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M7 10l5 5 5-5z"/>
-                        </svg>
-                    </div>
-                    <div class="folder-content">
-                        <!-- Add content archive files -->
-                    </div>
-                </div>
-            </div>
-        </div>
+            <!-- เพิ่มโฟลเดอร์อื่นๆ ตามโครงสร้างที่ต้องการ -->
 
-        <!-- Add B. PROJECTS HANDOVER and C. COMPANY ACCESS folders -->
-        
+        </ul>
     </div>
 
     <!-- Preview Modal -->
     <div id="previewModal">
         <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title">File Preview</div>
-                <button class="close-modal" onclick="closePreview()">&times;</button>
-            </div>
-            <div class="modal-body" id="previewContent">
-            </div>
+            <span class="close-modal" onclick="closePreview()">&times;</span>
+            <iframe id="previewFrame" class="modal-iframe" allowfullscreen></iframe>
         </div>
     </div>
 
     <script>
-        // Toggle folders
-        document.querySelectorAll('.folder-header').forEach(header => {
-            header.addEventListener('click', function() {
-                const folder = this.parentElement;
-                folder.classList.toggle('open');
+        // Toggle folder expansion
+        document.querySelectorAll('.toggle-icon').forEach(icon => {
+            icon.parentElement.addEventListener('click', (e) => {
+                if (e.target.tagName !== 'A' && !e.target.classList.contains('preview-btn') && !e.target.classList.contains('download-btn')) {
+                    const li = icon.parentElement;
+                    li.classList.toggle('opened');
+                    icon.classList.toggle('fa-folder');
+                    icon.classList.toggle('fa-folder-open');
+                }
             });
         });
 
-        // Preview function for Google Drive files
-        function previewFile(fileUrl) {
+        // Preview function
+        function previewFile(fileId) {
             const modal = document.getElementById('previewModal');
-            const content = document.getElementById('previewContent');
-            
-            // Create iframe for Google Drive preview
-            content.innerHTML = `<iframe src="${fileUrl}" allow="autoplay"></iframe>`;
+            const iframe = document.getElementById('previewFrame');
+            iframe.src = `https://drive.google.com/file/d/${fileId}/preview`;
             modal.style.display = 'block';
         }
 
-        // Download function for Google Drive files
-        function downloadFile(fileUrl) {
-            window.open(fileUrl, '_blank');
+        // Download function
+        function downloadFile(fileId) {
+            window.open(`https://drive.google.com/uc?export=download&id=${fileId}`, '_blank');
         }
 
         // Close preview
         function closePreview() {
-            document.getElementById('previewModal').style.display = 'none';
-            document.getElementById('previewContent').innerHTML = '';
+            const modal = document.getElementById('previewModal');
+            const iframe = document.getElementById('previewFrame');
+            modal.style.display = 'none';
+            iframe.src = '';
         }
 
         // Close modal when clicking outside
