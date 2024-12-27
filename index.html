@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -64,7 +64,7 @@
         .folder-icon {
             width: 24px;
             height: 24px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23007AFF'%3E%3Cpath d='M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23007AFF'%3E%3Cpath d='M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z'/%3E%3C/svg%3E");
             background-size: contain;
             flex-shrink: 0;
         }
@@ -109,8 +109,8 @@
             border-radius: 8px;
             background: #f2f2f7;
             min-height: 44px;
-            text-decoration: none;
             color: #000;
+            text-decoration: none;
         }
 
         .file-item:active {
@@ -120,9 +120,81 @@
         .file-icon {
             width: 20px;
             height: 20px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238e8e93'%3E%3Cpath d='M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2z'/%3E%3C/svg%3E");
             background-size: contain;
             flex-shrink: 0;
+        }
+
+        .file-content {
+            flex-grow: 1;
+        }
+
+        .file-name {
+            font-size: 17px;
+            margin-bottom: 4px;
+        }
+
+        .file-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .preview-btn, .download-btn {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+        }
+
+        .preview-btn {
+            background: #007AFF;
+            color: white;
+        }
+
+        .download-btn {
+            background: #34C759;
+            color: white;
+        }
+
+        .preview-btn:active, .download-btn:active {
+            opacity: 0.8;
+        }
+
+        #previewModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #8e8e93;
         }
 
         @keyframes slideDown {
@@ -140,6 +212,10 @@
         ::-webkit-scrollbar {
             display: none;
         }
+
+        /* File type icons */
+        .pdf-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FF3B30'%3E%3Cpath d='M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z'/%3E%3C/svg%3E"); }
+        .txt-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238e8e93'%3E%3Cpath d='M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2z'/%3E%3C/svg%3E"); }
     </style>
 </head>
 <body>
@@ -161,87 +237,92 @@
                             <div class="folder-arrow"></div>
                         </div>
                         <div class="folder-content">
-                            <a href="A_MARKETING_HANDOVER/Monthly_Reports/SUC_Monthly_Report_2024.pdf" class="file-item">
-                                <div class="file-icon"></div>
-                                <span>SUC Monthly Report 2024</span>
-                            </a>
-                            <a href="A_MARKETING_HANDOVER/Monthly_Reports/TSD_Monthly_Report_2024.pdf" class="file-item">
-                                <div class="file-icon"></div>
-                                <span>TSD Monthly Report 2024</span>
-                            </a>
-                            <a href="A_MARKETING_HANDOVER/Monthly_Reports/CHN_Monthly_Report_2024.pdf" class="file-item">
-                                <div class="file-icon"></div>
-                                <span>CHN Monthly Report 2024</span>
-                            </a>
+                            <div class="file-item">
+                                <div class="file-icon pdf-icon"></div>
+                                <div class="file-content">
+                                    <div class="file-name">SUC Monthly Report 2024</div>
+                                    <div class="file-buttons">
+                                        <button class="preview-btn" onclick="previewFile('A_MARKETING_HANDOVER/Monthly_Reports/SUC_Monthly_Report_2024.pdf')">Preview</button>
+                                        <button class="download-btn" onclick="downloadFile('A_MARKETING_HANDOVER/Monthly_Reports/SUC_Monthly_Report_2024.pdf')">Download</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Add other files similarly -->
                         </div>
                     </div>
-                    <!-- Content Archives folder structure similar to Monthly Reports -->
                 </div>
             </div>
 
-            <!-- B. PROJECTS HANDOVER -->
-            <div class="folder-item">
-                <div class="folder-header">
-                    <div class="folder-icon"></div>
-                    <div class="folder-title">B. PROJECTS HANDOVER</div>
-                    <div class="folder-arrow"></div>
-                </div>
-                <div class="folder-content">
-                    <!-- Add similar structure for project folders -->
-                </div>
-            </div>
+            <!-- Add other main folders similarly -->
+        </div>
+    </div>
 
-            <!-- C. COMPANY ACCESS -->
-            <div class="folder-item">
-                <div class="folder-header">
-                    <div class="folder-icon"></div>
-                    <div class="folder-title">C. COMPANY ACCESS</div>
-                    <div class="folder-arrow"></div>
-                </div>
-                <div class="folder-content">
-                    <a href="C_COMPANY_ACCESS/CRM_Credentials.txt" class="file-item">
-                        <div class="file-icon"></div>
-                        <span>CRM Credentials</span>
-                    </a>
-                    <a href="C_COMPANY_ACCESS/Analytics_Passwords.txt" class="file-item">
-                        <div class="file-icon"></div>
-                        <span>Analytics Passwords</span>
-                    </a>
-                    <a href="C_COMPANY_ACCESS/Platform_Links.txt" class="file-item">
-                        <div class="file-icon"></div>
-                        <span>Platform Links</span>
-                    </a>
-                </div>
-            </div>
+    <!-- Preview Modal -->
+    <div id="previewModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closePreview()">&times;</button>
+            <div id="previewContent"></div>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add click handlers to all folder headers
-            document.querySelectorAll('.folder-header').forEach(header => {
-                header.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    // Toggle open class on header
-                    this.classList.toggle('open');
-                    
-                    // Toggle active class on the next folder-content
-                    const content = this.nextElementSibling;
-                    if (content && content.classList.contains('folder-content')) {
-                        content.classList.toggle('active');
-                    }
-                });
-            });
-
-            // Prevent click events on file items from bubbling up
-            document.querySelectorAll('.file-item').forEach(file => {
-                file.addEventListener('click', e => {
-                    e.stopPropagation();
-                });
+        // Toggle folders
+        document.querySelectorAll('.folder-header').forEach(header => {
+            header.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                this.classList.toggle('open');
+                const content = this.nextElementSibling;
+                if (content && content.classList.contains('folder-content')) {
+                    content.classList.toggle('active');
+                }
             });
         });
+
+        // File preview function
+        function previewFile(filePath) {
+            const modal = document.getElementById('previewModal');
+            const content = document.getElementById('previewContent');
+            
+            // Check file type and display appropriate preview
+            if (filePath.endsWith('.pdf')) {
+                content.innerHTML = `<iframe src="${filePath}" width="100%" height="500px"></iframe>`;
+            } else if (filePath.endsWith('.txt')) {
+                // For text files, you might want to fetch and display the content
+                fetch(filePath)
+                    .then(response => response.text())
+                    .then(text => {
+                        content.innerHTML = `<pre>${text}</pre>`;
+                    });
+            }
+            
+            modal.style.display = 'block';
+        }
+
+        // Close preview modal
+        function closePreview() {
+            document.getElementById('previewModal').style.display = 'none';
+        }
+
+        // Download function
+        function downloadFile(filePath) {
+            const link = document.createElement('a');
+            link.href = filePath;
+            link.download = filePath.split('/').pop();
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('previewModal');
+            if (event.target == modal) {
+                closePreview();
+            }
+        };
     </script>
 </body>
+</html>
 </html>
