@@ -2,163 +2,133 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ART HANDOVER</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #f2f2f7;
-            color: #000;
+            background: #f2f2f7;
             padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
         }
 
         .container {
-            max-width: 100%;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 16px;
-            background: #fff;
-            min-height: 100vh;
+            padding: 20px;
         }
 
         h1 {
             text-align: center;
-            color: #1c1c1e;
-            font-size: 24px;
-            font-weight: 600;
-            margin: 20px 0;
-            padding: 0 16px;
+            font-size: 28px;
+            color: #1d1d1f;
+            margin: 20px 0 30px;
         }
 
-        .folder-item {
-            margin: 8px 0;
-            border-radius: 10px;
-            background: #fff;
-            cursor: pointer;
-            -webkit-touch-callout: none;
-            user-select: none;
+        .folder {
+            background: white;
+            border-radius: 12px;
+            margin: 10px 0;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
         .folder-header {
             display: flex;
             align-items: center;
-            padding: 16px;
+            padding: 15px 20px;
+            cursor: pointer;
+            user-select: none;
             gap: 12px;
-            background: #fff;
-            border-radius: 10px;
-            min-height: 44px;
-            position: relative;
-            border: 1px solid #e5e5ea;
-        }
-
-        .folder-header:active {
-            background-color: #f2f2f7;
         }
 
         .folder-icon {
             width: 24px;
             height: 24px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23007AFF'%3E%3Cpath d='M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z'/%3E%3C/svg%3E");
-            background-size: contain;
-            flex-shrink: 0;
+            color: #007AFF;
         }
 
         .folder-title {
+            flex: 1;
             font-size: 17px;
-            font-weight: 400;
             color: #007AFF;
-            flex-grow: 1;
+            font-weight: 500;
         }
 
         .folder-arrow {
-            width: 12px;
-            height: 12px;
-            border-right: 2px solid #8e8e93;
-            border-bottom: 2px solid #8e8e93;
-            transform: rotate(45deg);
+            width: 20px;
+            height: 20px;
             transition: transform 0.3s;
-            margin-right: 8px;
         }
 
-        .folder-header.open .folder-arrow {
-            transform: rotate(-135deg);
+        .folder.open .folder-arrow {
+            transform: rotate(180deg);
         }
 
         .folder-content {
             display: none;
-            padding: 0 16px 16px 40px;
+            padding: 0 20px 15px 56px;
         }
 
-        .folder-content.active {
+        .folder.open .folder-content {
             display: block;
-            animation: slideDown 0.3s ease-out;
         }
 
-        .file-item {
+        .file {
+            background: #f8f8fa;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin: 8px 0;
+        }
+
+        .file-header {
             display: flex;
             align-items: center;
-            padding: 12px 16px;
-            margin: 4px 0;
-            gap: 12px;
-            border-radius: 8px;
-            background: #f2f2f7;
-            min-height: 44px;
-            color: #000;
-            text-decoration: none;
-        }
-
-        .file-item:active {
-            background-color: #e5e5ea;
+            gap: 10px;
+            margin-bottom: 10px;
         }
 
         .file-icon {
             width: 20px;
             height: 20px;
-            background-size: contain;
-            flex-shrink: 0;
         }
 
-        .file-content {
-            flex-grow: 1;
+        .file-title {
+            font-size: 15px;
+            color: #1d1d1f;
         }
 
-        .file-name {
-            font-size: 17px;
-            margin-bottom: 4px;
-        }
-
-        .file-buttons {
+        .file-actions {
             display: flex;
             gap: 8px;
         }
 
-        .preview-btn, .download-btn {
-            padding: 6px 12px;
-            border-radius: 6px;
+        .btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
             font-size: 14px;
             font-weight: 500;
-            border: none;
             cursor: pointer;
+            transition: opacity 0.2s;
+            color: white;
+        }
+
+        .btn:active {
+            opacity: 0.8;
         }
 
         .preview-btn {
             background: #007AFF;
-            color: white;
         }
 
         .download-btn {
             background: #34C759;
-            color: white;
-        }
-
-        .preview-btn:active, .download-btn:active {
-            opacity: 0.8;
         }
 
         #previewModal {
@@ -178,141 +148,165 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background: white;
-            padding: 20px;
-            border-radius: 12px;
             width: 90%;
             max-width: 800px;
-            max-height: 80vh;
-            overflow-y: auto;
+            max-height: 90vh;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #e5e5ea;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-title {
+            font-size: 17px;
+            font-weight: 600;
         }
 
         .close-modal {
-            position: absolute;
-            top: 10px;
-            right: 10px;
             background: none;
             border: none;
             font-size: 24px;
-            cursor: pointer;
             color: #8e8e93;
+            cursor: pointer;
         }
 
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+            max-height: calc(90vh - 60px);
         }
 
-        /* Hide scrollbar for iOS */
-        ::-webkit-scrollbar {
-            display: none;
+        iframe {
+            width: 100%;
+            height: 80vh;
+            border: none;
         }
-
-        /* File type icons */
-        .pdf-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FF3B30'%3E%3Cpath d='M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z'/%3E%3C/svg%3E"); }
-        .txt-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238e8e93'%3E%3Cpath d='M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2z'/%3E%3C/svg%3E"); }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>ART HANDOVER</h1>
-        <div class="folder-structure">
-            <!-- A. MARKETING HANDOVER -->
-            <div class="folder-item">
-                <div class="folder-header">
-                    <div class="folder-icon"></div>
-                    <div class="folder-title">A. MARKETING HANDOVER</div>
-                    <div class="folder-arrow"></div>
-                </div>
-                <div class="folder-content">
-                    <div class="folder-item">
-                        <div class="folder-header">
-                            <div class="folder-icon"></div>
-                            <div class="folder-title">Monthly Reports</div>
-                            <div class="folder-arrow"></div>
-                        </div>
-                        <div class="folder-content">
-                            <div class="file-item">
-                                <div class="file-icon pdf-icon"></div>
-                                <div class="file-content">
-                                    <div class="file-name">SUC Monthly Report 2024</div>
-                                    <div class="file-buttons">
-                                        <button class="preview-btn" onclick="previewFile('A_MARKETING_HANDOVER/Monthly_Reports/SUC_Monthly_Report_2024.pdf')">Preview</button>
-                                        <button class="download-btn" onclick="downloadFile('A_MARKETING_HANDOVER/Monthly_Reports/SUC_Monthly_Report_2024.pdf')">Download</button>
-                                    </div>
-                                </div>
+        
+        <!-- A. MARKETING HANDOVER -->
+        <div class="folder">
+            <div class="folder-header">
+                <svg class="folder-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/>
+                </svg>
+                <div class="folder-title">A. MARKETING HANDOVER</div>
+                <svg class="folder-arrow" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M7 10l5 5 5-5z"/>
+                </svg>
+            </div>
+            <div class="folder-content">
+                <!-- Monthly Reports -->
+                <div class="folder">
+                    <div class="folder-header">
+                        <svg class="folder-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/>
+                        </svg>
+                        <div class="folder-title">Monthly Reports</div>
+                        <svg class="folder-arrow" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </div>
+                    <div class="folder-content">
+                        <div class="file">
+                            <div class="file-header">
+                                <svg class="file-icon" viewBox="0 0 24 24" fill="#FF3B30">
+                                    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2z"/>
+                                </svg>
+                                <div class="file-title">SUC Monthly Report 2024</div>
                             </div>
-                            <!-- Add other files similarly -->
+                            <div class="file-actions">
+                                <button class="btn preview-btn" onclick="previewFile('https://drive.google.com/file/d/1zT60tgSHY-oNTn3KPuiA1iRzbf8ORQXI/preview')">Preview</button>
+                                <button class="btn download-btn" onclick="downloadFile('https://drive.google.com/uc?export=download&id=1zT60tgSHY-oNTn3KPuiA1iRzbf8ORQXI')">Download</button>
+                            </div>
                         </div>
+                        <div class="file">
+                            <div class="file-header">
+                                <svg class="file-icon" viewBox="0 0 24 24" fill="#FF3B30">
+                                    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2z"/>
+                                </svg>
+                                <div class="file-title">TSD Monthly Report 2024</div>
+                            </div>
+                            <div class="file-actions">
+                                <button class="btn preview-btn" onclick="previewFile('path_to_tsd_report')">Preview</button>
+                                <button class="btn download-btn" onclick="downloadFile('path_to_tsd_report')">Download</button>
+                            </div>
+                        </div>
+                        <!-- Add more reports -->
+                    </div>
+                </div>
+
+                <!-- Content Archives -->
+                <div class="folder">
+                    <div class="folder-header">
+                        <svg class="folder-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/>
+                        </svg>
+                        <div class="folder-title">Content Archives</div>
+                        <svg class="folder-arrow" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </div>
+                    <div class="folder-content">
+                        <!-- Add content archive files -->
                     </div>
                 </div>
             </div>
-
-            <!-- Add other main folders similarly -->
         </div>
+
+        <!-- Add B. PROJECTS HANDOVER and C. COMPANY ACCESS folders -->
+        
     </div>
 
     <!-- Preview Modal -->
     <div id="previewModal">
         <div class="modal-content">
-            <button class="close-modal" onclick="closePreview()">&times;</button>
-            <div id="previewContent"></div>
+            <div class="modal-header">
+                <div class="modal-title">File Preview</div>
+                <button class="close-modal" onclick="closePreview()">&times;</button>
+            </div>
+            <div class="modal-body" id="previewContent">
+            </div>
         </div>
     </div>
 
     <script>
         // Toggle folders
         document.querySelectorAll('.folder-header').forEach(header => {
-            header.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                this.classList.toggle('open');
-                const content = this.nextElementSibling;
-                if (content && content.classList.contains('folder-content')) {
-                    content.classList.toggle('active');
-                }
+            header.addEventListener('click', function() {
+                const folder = this.parentElement;
+                folder.classList.toggle('open');
             });
         });
 
-        // File preview function
-        function previewFile(filePath) {
+        // Preview function for Google Drive files
+        function previewFile(fileUrl) {
             const modal = document.getElementById('previewModal');
             const content = document.getElementById('previewContent');
             
-            // Check file type and display appropriate preview
-            if (filePath.endsWith('.pdf')) {
-                content.innerHTML = `<iframe src="${filePath}" width="100%" height="500px"></iframe>`;
-            } else if (filePath.endsWith('.txt')) {
-                // For text files, you might want to fetch and display the content
-                fetch(filePath)
-                    .then(response => response.text())
-                    .then(text => {
-                        content.innerHTML = `<pre>${text}</pre>`;
-                    });
-            }
-            
+            // Create iframe for Google Drive preview
+            content.innerHTML = `<iframe src="${fileUrl}" allow="autoplay"></iframe>`;
             modal.style.display = 'block';
         }
 
-        // Close preview modal
-        function closePreview() {
-            document.getElementById('previewModal').style.display = 'none';
+        // Download function for Google Drive files
+        function downloadFile(fileUrl) {
+            window.open(fileUrl, '_blank');
         }
 
-        // Download function
-        function downloadFile(filePath) {
-            const link = document.createElement('a');
-            link.href = filePath;
-            link.download = filePath.split('/').pop();
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+        // Close preview
+        function closePreview() {
+            document.getElementById('previewModal').style.display = 'none';
+            document.getElementById('previewContent').innerHTML = '';
         }
 
         // Close modal when clicking outside
@@ -321,8 +315,7 @@
             if (event.target == modal) {
                 closePreview();
             }
-        };
+        }
     </script>
 </body>
-</html>
 </html>
