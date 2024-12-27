@@ -2,168 +2,466 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>ART HANDOVER</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Your existing styles */
-        /* ... (รวมทั้ง CSS ที่คุณมีอยู่) ... */
+        /* CSS Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-        /* เพิ่มสไตล์สำหรับ preview/download */
-        .preview-btn, .download-btn {
-            display: inline-block;
-            padding: 6px 12px;
-            margin: 0 5px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            text-decoration: none;
+        :root {
+            --primary-color: #007AFF;
+            --success-color: #34C759;
+            --background-color: #F2F2F7;
+            --card-background: #FFFFFF;
+            --text-primary: #000000;
+            --text-secondary: #6C6C6E;
+            --border-color: #E5E5EA;
+            --header-height: 44px;
+            --safe-area-inset-top: env(safe-area-inset-top);
+            --safe-area-inset-bottom: env(safe-area-inset-bottom);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Icons', system-ui, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            padding: calc(var(--safe-area-inset-top) + var(--header-height)) 0 var(--safe-area-inset-bottom);
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: calc(var(--header-height) + var(--safe-area-inset-top));
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 100;
+            padding-top: var(--safe-area-inset-top);
+            border-bottom: 0.5px solid var(--border-color);
+        }
+
+        .header-content {
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 16px;
+        }
+
+        .header-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: var(--card-background);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-header {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 0.5px solid var(--border-color);
+        }
+
+        .section-icon {
+            width: 28px;
+            height: 28px;
+            background: var(--primary-color);
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: white;
-            cursor: pointer;
         }
 
-        .preview-btn {
-            background: #007aff;
+        .section-title {
+            font-size: 17px;
+            font-weight: 600;
+            flex: 1;
         }
 
-        .download-btn {
-            background: #34c759;
+        .section-content {
+            display: none;
+            padding: 0;
+        }
+
+        .section-card.open .section-content {
+            display: block;
+        }
+
+        /* File Items */
+        .file-item {
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 0.5px solid var(--border-color);
+            background: var(--card-background);
+        }
+
+        .file-item:last-child {
+            border-bottom: none;
+        }
+
+        .file-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .file-icon.ppt {
+            background: #FF3B30;
+            color: white;
+        }
+
+        .file-info {
+            flex: 1;
+        }
+
+        .file-name {
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .file-date {
+            font-size: 13px;
+            color: var(--text-secondary);
         }
 
         .file-actions {
-            margin-left: 20px;
-            display: inline-block;
+            display: flex;
+            gap: 8px;
         }
 
-        #previewModal {
+        .action-button {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .preview-btn {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .download-btn {
+            background: var(--success-color);
+            color: white;
+        }
+
+        /* Preview Modal */
+        .modal {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             z-index: 1000;
+            padding: calc(var(--safe-area-inset-top) + 20px) 20px var(--safe-area-inset-bottom);
+        }
+
+        .modal-container {
+            background: var(--card-background);
+            border-radius: 12px;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            animation: modalSlideUp 0.3s ease-out;
+        }
+
+        .modal-header {
+            height: 44px;
+            border-bottom: 0.5px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .modal-title {
+            flex: 1;
+            font-size: 17px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .modal-close {
+            padding: 8px;
+            margin: -8px;
+            color: var(--primary-color);
+            font-size: 17px;
+            border: none;
+            background: none;
+            cursor: pointer;
         }
 
         .modal-content {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 800px;
-            height: 90vh;
+            flex: 1;
+            overflow: hidden;
         }
 
-        .modal-iframe {
+        .preview-iframe {
             width: 100%;
-            height: calc(100% - 40px);
+            height: 100%;
             border: none;
         }
 
-        .close-modal {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 24px;
-            cursor: pointer;
-            color: #666;
+        @keyframes modalSlideUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 <body>
-    <h1>ART HANDOVER</h1>
-    <div class="tree-container">
-        <ul class="tree">
-            <!-- A. MARKETING HANDOVER -->
-            <li>
-                <i class="fas fa-folder toggle-icon"></i>
-                <strong>A. MARKETING HANDOVER</strong>
-                <ul>
-                    <!-- Monthly Reports -->
-                    <li>
-                        <i class="fas fa-folder toggle-icon"></i>
-                        Marketing Documents
-                        <ul>
-                            <li>
-                                <i class="fas fa-file-powerpoint"></i>
-                                September 2023
-                                <div class="file-actions">
-                                    <a class="preview-btn" onclick="previewFile('1O1FjMGRgrC5UGq6A6cBdTD4vZ9mTD29v4TLvpBatqPE')">Preview</a>
-                                    <a class="download-btn" onclick="downloadFile('1O1FjMGRgrC5UGq6A6cBdTD4vZ9mTD29v4TLvpBatqPE')">Download</a>
-                                </div>
-                            </li>
-                            <li>
-                                <i class="fas fa-file-powerpoint"></i>
-                                October 2023
-                                <div class="file-actions">
-                                    <a class="preview-btn" onclick="previewFile('1wRlNZwLCom9GAobyoATAGe3p-axtpFtYudIY9o04P7M')">Preview</a>
-                                    <a class="download-btn" onclick="downloadFile('1wRlNZwLCom9GAobyoATAGe3p-axtpFtYudIY9o04P7M')">Download</a>
-                                </div>
-                            </li>
-                            <li>
-                                <i class="fas fa-file-powerpoint"></i>
-                                December 2023
-                                <div class="file-actions">
-                                    <a class="preview-btn" onclick="previewFile('10wyYfqPh-anKnV9BNKc1R6Oi_nVhGxOErPiOaQZb_U8')">Preview</a>
-                                    <a class="download-btn" onclick="downloadFile('10wyYfqPh-anKnV9BNKc1R6Oi_nVhGxOErPiOaQZb_U8')">Download</a>
-                                </div>
-                            </li>
-                            <li>
-                                <i class="fas fa-file-powerpoint"></i>
-                                January 2024
-                                <div class="file-actions">
-                                    <a class="preview-btn" onclick="previewFile('1RZBceNmt_VFu6t4UghUfmU9THmbvPnwnDcud4v_rfkM')">Preview</a>
-                                    <a class="download-btn" onclick="downloadFile('1RZBceNmt_VFu6t4UghUfmU9THmbvPnwnDcud4v_rfkM')">Download</a>
-                                </div>
-                            </li>
-                            <li>
-                                <i class="fas fa-file-powerpoint"></i>
-                                February - March 2024
-                                <div class="file-actions">
-                                    <a class="preview-btn" onclick="previewFile('1gIcAR9mDXO07u0h7vppIxYazjT95eVLS7elndn5l_8o')">Preview</a>
-                                    <a class="download-btn" onclick="downloadFile('1gIcAR9mDXO07u0h7vppIxYazjT95eVLS7elndn5l_8o')">Download</a>
-                                </div>
-                            </li>
-                            <li>
-                                <i class="fas fa-file-powerpoint"></i>
-                                2023 Ads Report
-                                <div class="file-actions">
-                                    <a class="preview-btn" onclick="previewFile('1ypdtxu6fo7O1Ztp0YWHcpP3tgwLqxTacZ4tb6qqxOQM')">Preview</a>
-                                    <a class="download-btn" onclick="downloadFile('1ypdtxu6fo7O1Ztp0YWHcpP3tgwLqxTacZ4tb6qqxOQM')">Download</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="header-title">ART HANDOVER</h1>
+        </div>
+    </header>
 
-            <!-- เพิ่มโฟลเดอร์อื่นๆ ตามโครงสร้างที่ต้องการ -->
+    <!-- Main Container -->
+    <div class="container">
+        <!-- A. MARKETING HANDOVER -->
+        <div class="section-card">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-folder"></i>
+                </div>
+                <h2 class="section-title">A. MARKETING HANDOVER</h2>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="section-content">
+                <!-- Marketing Documents -->
+                <div class="file-item">
+                    <div class="file-icon ppt">
+                        <i class="fas fa-file-powerpoint"></i>
+                    </div>
+                    <div class="file-info">
+                        <div class="file-name">September 2023</div>
+                        <div class="file-date">Marketing Report</div>
+                    </div>
+                    <div class="file-actions">
+                        <button class="action-button preview-btn" onclick="previewFile('1O1FjMGRgrC5UGq6A6cBdTD4vZ9mTD29v4TLvpBatqPE')">
+                            <i class="fas fa-eye"></i>
+                            Preview
+                        </button>
+                        <button class="action-button download-btn" onclick="downloadFile('1O1FjMGRgrC5UGq6A6cBdTD4vZ9mTD29v4TLvpBatqPE')">
+                            <i class="fas fa-download"></i>
+                            Download
+                        </button>
+                    </div>
+                </div>
 
-        </ul>
+                <div class="file-item">
+                    <div class="file-icon ppt">
+                        <i class="fas fa-file-powerpoint"></i>
+                    </div>
+                    <div class="file-info">
+                        <div class="file-name">October 2023</div>
+                        <div class="file-date">Marketing Report</div>
+                    </div>
+                    <div class="file-actions">
+                        <button class="action-button preview-btn" onclick="previewFile('1wRlNZwLCom9GAobyoATAGe3p-axtpFtYudIY9o04P7M')">
+                            <i class="fas fa-eye"></i>
+                            Preview
+                        </button>
+                        <button class="action-button download-btn" onclick="downloadFile('1wRlNZwLCom9GAobyoATAGe3p-axtpFtYudIY9o04P7M')">
+                            <i class="fas fa-download"></i>
+                            Download
+                        </button>
+                    </div>
+                </div>
+                
+ios-premium-file-structure-2" type="application/vnd.ant.code" title="Premium iOS File Structure - Part 2">
+                <!-- ต่อจากส่วนแรก -->
+                <div class="file-item">
+                    <div class="file-icon ppt">
+                        <i class="fas fa-file-powerpoint"></i>
+                    </div>
+                    <div class="file-info">
+                        <div class="file-name">December 2023</div>
+                        <div class="file-date">Marketing Report</div>
+                    </div>
+                    <div class="file-actions">
+                        <button class="action-button preview-btn" onclick="previewFile('10wyYfqPh-anKnV9BNKc1R6Oi_nVhGxOErPiOaQZb_U8')">
+                            <i class="fas fa-eye"></i>
+                            Preview
+                        </button>
+                        <button class="action-button download-btn" onclick="downloadFile('10wyYfqPh-anKnV9BNKc1R6Oi_nVhGxOErPiOaQZb_U8')">
+                            <i class="fas fa-download"></i>
+                            Download
+                        </button>
+                    </div>
+                </div>
+
+                <div class="file-item">
+                    <div class="file-icon ppt">
+                        <i class="fas fa-file-powerpoint"></i>
+                    </div>
+                    <div class="file-info">
+                        <div class="file-name">January 2024</div>
+                        <div class="file-date">Marketing Report</div>
+                    </div>
+                    <div class="file-actions">
+                        <button class="action-button preview-btn" onclick="previewFile('1RZBceNmt_VFu6t4UghUfmU9THmbvPnwnDcud4v_rfkM')">
+                            <i class="fas fa-eye"></i>
+                            Preview
+                        </button>
+                        <button class="action-button download-btn" onclick="downloadFile('1RZBceNmt_VFu6t4UghUfmU9THmbvPnwnDcud4v_rfkM')">
+                            <i class="fas fa-download"></i>
+                            Download
+                        </button>
+                    </div>
+                </div>
+
+                <div class="file-item">
+                    <div class="file-icon ppt">
+                        <i class="fas fa-file-powerpoint"></i>
+                    </div>
+                    <div class="file-info">
+                        <div class="file-name">February - March 2024</div>
+                        <div class="file-date">Marketing Report</div>
+                    </div>
+                    <div class="file-actions">
+                        <button class="action-button preview-btn" onclick="previewFile('1gIcAR9mDXO07u0h7vppIxYazjT95eVLS7elndn5l_8o')">
+                            <i class="fas fa-eye"></i>
+                            Preview
+                        </button>
+                        <button class="action-button download-btn" onclick="downloadFile('1gIcAR9mDXO07u0h7vppIxYazjT95eVLS7elndn5l_8o')">
+                            <i class="fas fa-download"></i>
+                            Download
+                        </button>
+                    </div>
+                </div>
+
+                <div class="file-item">
+                    <div class="file-icon ppt">
+                        <i class="fas fa-file-powerpoint"></i>
+                    </div>
+                    <div class="file-info">
+                        <div class="file-name">2023 Ads Report</div>
+                        <div class="file-date">Annual Report</div>
+                    </div>
+                    <div class="file-actions">
+                        <button class="action-button preview-btn" onclick="previewFile('1ypdtxu6fo7O1Ztp0YWHcpP3tgwLqxTacZ4tb6qqxOQM')">
+                            <i class="fas fa-eye"></i>
+                            Preview
+                        </button>
+                        <button class="action-button download-btn" onclick="downloadFile('1ypdtxu6fo7O1Ztp0YWHcpP3tgwLqxTacZ4tb6qqxOQM')">
+                            <i class="fas fa-download"></i>
+                            Download
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- B. PROJECTS HANDOVER -->
+        <div class="section-card">
+            <div class="section-header">
+                <div class="section-icon" style="background: #5856D6;">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <h2 class="section-title">B. PROJECTS HANDOVER</h2>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="section-content">
+                <!-- Add project files here using the same structure -->
+            </div>
+        </div>
+
+        <!-- C. COMPANY ACCESS -->
+        <div class="section-card">
+            <div class="section-header">
+                <div class="section-icon" style="background: #FF9500;">
+                    <i class="fas fa-key"></i>
+                </div>
+                <h2 class="section-title">C. COMPANY ACCESS</h2>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="section-content">
+                <!-- Add access files here using the same structure -->
+            </div>
+        </div>
     </div>
+            </div>
+        </div>
 
-    <!-- Preview Modal -->
-    <div id="previewModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closePreview()">&times;</span>
-            <iframe id="previewFrame" class="modal-iframe" allowfullscreen></iframe>
+        <!-- Preview Modal -->
+        <div id="previewModal" class="modal">
+            <div class="modal-container">
+                <div class="modal-header">
+                    <button class="modal-close" onclick="closePreview()">Close</button>
+                    <div class="modal-title">File Preview</div>
+                    <div style="width: 40px;"></div>
+                </div>
+                <div class="modal-content">
+                    <iframe id="previewFrame" class="preview-iframe" allowfullscreen></iframe>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <script>
-        // Toggle folder expansion
-        document.querySelectorAll('.toggle-icon').forEach(icon => {
-            icon.parentElement.addEventListener('click', (e) => {
-                if (e.target.tagName !== 'A' && !e.target.classList.contains('preview-btn') && !e.target.classList.contains('download-btn')) {
-                    const li = icon.parentElement;
-                    li.classList.toggle('opened');
-                    icon.classList.toggle('fa-folder');
-                    icon.classList.toggle('fa-folder-open');
-                }
+        // Toggle sections
+        document.querySelectorAll('.section-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const section = header.closest('.section-card');
+                section.classList.toggle('open');
             });
         });
 
@@ -172,7 +470,8 @@
             const modal = document.getElementById('previewModal');
             const iframe = document.getElementById('previewFrame');
             iframe.src = `https://drive.google.com/file/d/${fileId}/preview`;
-            modal.style.display = 'block';
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
 
         // Download function
@@ -186,15 +485,15 @@
             const iframe = document.getElementById('previewFrame');
             modal.style.display = 'none';
             iframe.src = '';
+            document.body.style.overflow = '';
         }
 
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('previewModal');
-            if (event.target == modal) {
+        // Close modal on outside click
+        document.getElementById('previewModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
                 closePreview();
             }
-        }
+        });
     </script>
 </body>
 </html>
