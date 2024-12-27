@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ART HANDOVER</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f2f2f7;
+            color: #000;
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 16px;
+            background: #fff;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1c1c1e;
+            font-size: 24px;
+            font-weight: 600;
+            margin: 20px 0;
+            padding: 0 16px;
+        }
+
+        .folder-item {
+            margin: 8px 0;
+            border-radius: 10px;
+            background: #fff;
+            cursor: pointer;
+            -webkit-touch-callout: none;
+            user-select: none;
+        }
+
+        .folder-header {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            gap: 12px;
+            background: #fff;
+            border-radius: 10px;
+            min-height: 44px;
+            position: relative;
+            border: 1px solid #e5e5ea;
+        }
+
+        .folder-header:active {
+            background-color: #f2f2f7;
+        }
+
+        .folder-icon {
+            width: 24px;
+            height: 24px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23007AFF'%3E%3Cpath d='M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z'/%3E%3C/svg%3E");
+            background-size: contain;
+            flex-shrink: 0;
+        }
+
+        .folder-title {
+            font-size: 17px;
+            font-weight: 400;
+            color: #007AFF;
+            flex-grow: 1;
+        }
+
+        .folder-arrow {
+            width: 12px;
+            height: 12px;
+            border-right: 2px solid #8e8e93;
+            border-bottom: 2px solid #8e8e93;
+            transform: rotate(45deg);
+            transition: transform 0.3s;
+            margin-right: 8px;
+        }
+
+        .folder-header.open .folder-arrow {
+            transform: rotate(-135deg);
+        }
+
+        .folder-content {
+            display: none;
+            padding: 0 16px 16px 40px;
+        }
+
+        .folder-content.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            margin: 4px 0;
+            gap: 12px;
+            border-radius: 8px;
+            background: #f2f2f7;
+            min-height: 44px;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .file-item:active {
+            background-color: #e5e5ea;
+        }
+
+        .file-icon {
+            width: 20px;
+            height: 20px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238e8e93'%3E%3Cpath d='M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2z'/%3E%3C/svg%3E");
+            background-size: contain;
+            flex-shrink: 0;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hide scrollbar for iOS */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ART HANDOVER</h1>
+        <div class="folder-structure">
+            <!-- A. MARKETING HANDOVER -->
+            <div class="folder-item">
+                <div class="folder-header">
+                    <div class="folder-icon"></div>
+                    <div class="folder-title">A. MARKETING HANDOVER</div>
+                    <div class="folder-arrow"></div>
+                </div>
+                <div class="folder-content">
+                    <div class="folder-item">
+                        <div class="folder-header">
+                            <div class="folder-icon"></div>
+                            <div class="folder-title">Monthly Reports</div>
+                            <div class="folder-arrow"></div>
+                        </div>
+                        <div class="folder-content">
+                            <a href="A_MARKETING_HANDOVER/Monthly_Reports/SUC_Monthly_Report_2024.pdf" class="file-item">
+                                <div class="file-icon"></div>
+                                <span>SUC Monthly Report 2024</span>
+                            </a>
+                            <a href="A_MARKETING_HANDOVER/Monthly_Reports/TSD_Monthly_Report_2024.pdf" class="file-item">
+                                <div class="file-icon"></div>
+                                <span>TSD Monthly Report 2024</span>
+                            </a>
+                            <a href="A_MARKETING_HANDOVER/Monthly_Reports/CHN_Monthly_Report_2024.pdf" class="file-item">
+                                <div class="file-icon"></div>
+                                <span>CHN Monthly Report 2024</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Content Archives folder structure similar to Monthly Reports -->
+                </div>
+            </div>
+
+            <!-- B. PROJECTS HANDOVER -->
+            <div class="folder-item">
+                <div class="folder-header">
+                    <div class="folder-icon"></div>
+                    <div class="folder-title">B. PROJECTS HANDOVER</div>
+                    <div class="folder-arrow"></div>
+                </div>
+                <div class="folder-content">
+                    <!-- Add similar structure for project folders -->
+                </div>
+            </div>
+
+            <!-- C. COMPANY ACCESS -->
+            <div class="folder-item">
+                <div class="folder-header">
+                    <div class="folder-icon"></div>
+                    <div class="folder-title">C. COMPANY ACCESS</div>
+                    <div class="folder-arrow"></div>
+                </div>
+                <div class="folder-content">
+                    <a href="C_COMPANY_ACCESS/CRM_Credentials.txt" class="file-item">
+                        <div class="file-icon"></div>
+                        <span>CRM Credentials</span>
+                    </a>
+                    <a href="C_COMPANY_ACCESS/Analytics_Passwords.txt" class="file-item">
+                        <div class="file-icon"></div>
+                        <span>Analytics Passwords</span>
+                    </a>
+                    <a href="C_COMPANY_ACCESS/Platform_Links.txt" class="file-item">
+                        <div class="file-icon"></div>
+                        <span>Platform Links</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click handlers to all folder headers
+            document.querySelectorAll('.folder-header').forEach(header => {
+                header.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Toggle open class on header
+                    this.classList.toggle('open');
+                    
+                    // Toggle active class on the next folder-content
+                    const content = this.nextElementSibling;
+                    if (content && content.classList.contains('folder-content')) {
+                        content.classList.toggle('active');
+                    }
+                });
+            });
+
+            // Prevent click events on file items from bubbling up
+            document.querySelectorAll('.file-item').forEach(file => {
+                file.addEventListener('click', e => {
+                    e.stopPropagation();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
