@@ -1,221 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>ART HANDOVER</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nakoleo.me</title>
     <style>
-        /* Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #007AFF;
-            --success-color: #34C759;
-            --background-color: #F2F2F7;
-            --text-primary: #000000;
-            --text-secondary: #6C6C6E;
-            --header-height: 50px;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-            background-color: var(--background-color);
-            padding: var(--header-height) 0;
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: #fff;
-            height: var(--header-height);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 1px solid #ddd;
-            z-index: 100;
-        }
-
-        header h1 {
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        /* Content */
-        .container {
+            font-family: 'Sukhumvit Set', 'Prompt', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
             max-width: 800px;
             margin: 0 auto;
-            padding: 16px;
+            padding: 40px 20px;
+            line-height: 1.6;
         }
-
-        .section {
-            margin-bottom: 16px;
-            border: 1px solid #ddd;
+        .container {
+            background-color: white;
             border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .section-header {
-            background: var(--primary-color);
-            color: #fff;
-            padding: 10px 16px;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .section-header i {
-            margin-right: 10px;
-        }
-
-        .section-content {
-            display: none;
-            padding: 10px 16px;
-            background: #fff;
-        }
-
-        .section.open .section-content {
-            display: block;
-        }
-
-        .file-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: 10px 0;
-        }
-
-        .file-item .file-name {
-            font-size: 15px;
-        }
-
-        .file-actions button {
-            padding: 5px 10px;
-            border: none;
-            border-radius: 4px;
-            font-size: 12px;
-            cursor: pointer;
-        }
-
-        .preview-btn {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .download-btn {
-            background: var(--success-color);
-            color: white;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: #fff;
-            width: 90%;
-            max-width: 600px;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .modal-header {
-            background: var(--primary-color);
-            color: #fff;
-            padding: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 30px;
             text-align: center;
         }
-
-        .modal-body {
-            height: 500px;
+        h1 {
+            color: #005b96;
+            margin-bottom: 20px;
         }
-
-        iframe {
-            width: 100%;
-            height: 100%;
+        .logo {
+            max-width: 120px;
+            margin-bottom: 20px;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #777;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>ART HANDOVER</h1>
-    </header>
-
     <div class="container">
-        <!-- Section Example -->
-        <div class="section">
-            <div class="section-header" onclick="toggleSection(this)">
-                <i class="fas fa-folder"></i> A. Marketing Handover
-            </div>
-            <div class="section-content">
-                <div class="file-item">
-                    <span class="file-name">September 2023 - Marketing Report</span>
-                    <div class="file-actions">
-                        <button class="preview-btn" onclick="previewFile('1O1FjMGRgrC5UGq6A6cBdTD4vZ9mTD29v4TLvpBatqPE')">Preview</button>
-                        <button class="download-btn" onclick="downloadFile('1O1FjMGRgrC5UGq6A6cBdTD4vZ9mTD29v4TLvpBatqPE')">Download</button>
-                    </div>
-                </div>
-                <!-- Add more file items here -->
-            </div>
-        </div>
-        <!-- Add more sections here -->
-    </div>
-
-    <!-- Modal -->
-    <div class="modal" id="previewModal">
-        <div class="modal-content">
-            <div class="modal-header">File Preview</div>
-            <div class="modal-body">
-                <iframe id="previewFrame"></iframe>
-            </div>
+        <h1>nakoleo.me</h1>
+        <p>ยินดีต้อนรับสู่เว็บไซต์ของเรา</p>
+        <p>เว็บไซต์นี้อยู่ระหว่างการพัฒนา</p>
+        <div class="footer">
+            &copy; 2025 nakoleo.me - สงวนลิขสิทธิ์
         </div>
     </div>
-
-    <script>
-        // Toggle section
-        function toggleSection(header) {
-            header.closest('.section').classList.toggle('open');
-        }
-
-        // Preview file
-        function previewFile(fileId) {
-            const modal = document.getElementById('previewModal');
-            const iframe = document.getElementById('previewFrame');
-            iframe.src = `https://drive.google.com/file/d/${fileId}/preview`;
-            modal.style.display = 'flex';
-        }
-
-        // Close modal
-        document.getElementById('previewModal').addEventListener('click', function (e) {
-            if (e.target === this) {
-                this.style.display = 'none';
-                document.getElementById('previewFrame').src = '';
-            }
-        });
-
-        // Download file
-        function downloadFile(fileId) {
-            window.open(`https://drive.google.com/uc?export=download&id=${fileId}`, '_blank');
-        }
-    </script>
 </body>
 </html>
