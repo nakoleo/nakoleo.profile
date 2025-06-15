@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nakorn Thanthachwarakul - Resume</title>
 
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    <!-- Custom Styles -->
     <style>
         :root {
             --color-bg: #F5F7F1; /* Ivory White */
@@ -27,7 +30,7 @@
             background-color: var(--color-bg);
             color: var(--color-text-dark);
             overflow-x: hidden;
-            padding-bottom: 80px; /* Add padding for the FAB */
+            padding-bottom: 80px; /* เพิ่มพื้นที่ด้านล่างเพื่อไม่ให้ปุ่ม FAB บังเนื้อหา */
         }
         /* Light Theme */
         .text-accent { color: var(--color-accent); }
@@ -67,8 +70,8 @@
         /* Floating Action Button (FAB) Styles */
         .fab-container {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
+            bottom: 1.5rem;
+            right: 1.5rem;
             z-index: 50;
             display: flex;
             flex-direction: column-reverse;
@@ -123,6 +126,7 @@
 </head>
 <body class="min-h-screen">
 
+    <!-- ========== HEADER ========== -->
     <header class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300" id="header">
         <nav class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
@@ -149,23 +153,28 @@
     </header>
 
     <main>
+        <!-- ========== HERO SECTION ========== -->
         <section id="hero" class="dark-theme min-h-screen flex items-center justify-center relative pt-20">
              <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
             <div class="container mx-auto px-6 text-center relative z-10">
-                <img src="https://storage.googleapis.com/gemini-prod-us-west1-423525531068/f9202a48-18e3-4b68-80e9-b633041dd40c" alt="Nakorn Thanthachwarakul" class="w-32 h-32 mx-auto mb-6 rounded-full object-cover border-4 border-accent shadow-lg animate-on-scroll">
+                <!-- เปลี่ยน src เป็นชื่อไฟล์รูปภาพของคุณ -->
+                <img src="Nakorn_Ai_02.jpg" alt="Nakorn Thanthachwarakul" class="w-32 h-32 mx-auto mb-6 rounded-full object-cover border-4 border-accent shadow-lg animate-on-scroll">
                 <h1 class="text-4xl md:text-6xl font-bold mb-2 uppercase text-heading animate-on-scroll" style="transition-delay: 100ms;">NAKORN THANTACHAWARAKUL</h1>
                 <p class="text-md text-secondary font-light mb-8 animate-on-scroll" style="transition-delay: 200ms;">ณกรณ์ ธัญธัชวรากุล</p>
                 <p class="text-lg md:text-xl text-heading mb-6 max-w-2xl mx-auto animate-on-scroll" style="transition-delay: 300ms;">Business Development & Brand Innovation Strategist</p>
                 <p class="text-base text-secondary max-w-3xl mx-auto mb-10 leading-relaxed animate-on-scroll" style="transition-delay: 400ms;">7+ years transforming wellness brands through innovative positioning, creative campaigns, and data-driven marketing strategies.</p>
                 <div class="flex flex-wrap justify-center gap-4 mb-12 animate-on-scroll" style="transition-delay: 500ms;">
                     <a href="mailto:career@nakoleo.me" class="flex items-center px-6 py-3 bg-accent text-dark-bg rounded-md hover:opacity-90 shadow-lg shadow-accent/20 transition-all font-semibold"><i data-lucide="mail" class="w-4 h-4 mr-2"></i> Contact Me</a>
+                    <!-- เปลี่ยน href เป็นชื่อไฟล์ Resume ของคุณ -->
                     <a href="Nakorn_Thacthachwarakul_Resume2025+Project.pdf" download="Nakorn_T_Resume.pdf" class="flex items-center px-6 py-3 bg-text-light text-dark-bg rounded-md hover:opacity-90 shadow-lg shadow-black/20 transition-all font-semibold"><i data-lucide="download" class="w-4 h-4 mr-2"></i> Download CV</a>
+                    <!-- เปลี่ยน href เป็นชื่อไฟล์ Portfolio ของคุณ -->
                     <a href="Nakorn_Thacthachwarakul_Resume2025+Project.pdf" download="Nakorn_T_Portfolio.pdf" class="flex items-center px-6 py-3 border border-secondary text-text-light rounded-md hover:bg-secondary hover:text-dark-bg transition-all font-semibold"><i data-lucide="layout-template" class="w-4 h-4 mr-2"></i> Portfolio</a>
                 </div>
                 <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce animate-on-scroll" style="transition-delay: 600ms;"><i data-lucide="arrow-down" class="w-6 h-6 text-accent mx-auto"></i></div>
             </div>
         </section>
 
+        <!-- ========== ABOUT SECTION ========== -->
         <section id="about" class="py-24 section-bg-alt">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl font-bold text-center mb-16 text-text-dark uppercase tracking-wider animate-on-scroll">About Me</h2>
@@ -176,6 +185,7 @@
             </div>
         </section>
 
+        <!-- ========== EXPERIENCE SECTION ========== -->
         <section id="experience" class="py-24">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl font-bold text-center mb-16 text-text-dark uppercase tracking-wider animate-on-scroll">Professional Experience</h2>
