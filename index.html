@@ -15,10 +15,11 @@
     <style>
         :root {
             --color-bg: #F5F7F1; /* Ivory White */
-            --color-text: #172A44; /* Deep Navy */
+            --color-dark-bg: #172A44; /* Deep Navy */
+            --color-text-light: #F5F7F1;
+            --color-text-dark: #172A44;
             --color-accent: #D4B17A; /* Champagne Gold */
-            --color-secondary: #A89C94; /* Mushroom Taupe */
-            --color-border: rgba(23, 42, 68, 0.1);
+            --color-secondary: #8892b0; /* Slate-400 equivalent for secondary text */
         }
         html {
              -webkit-font-smoothing: antialiased;
@@ -27,20 +28,32 @@
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background-color: var(--color-bg);
-            color: var(--color-text);
+            color: var(--color-text-dark);
             overflow-x: hidden;
         }
+        /* Light Theme */
         .text-accent { color: var(--color-accent); }
         .bg-accent { background-color: var(--color-accent); }
         .border-accent { border-color: var(--color-accent); }
         .text-secondary { color: var(--color-secondary); }
-        .border-secondary { border-color: var(--color-secondary); }
         .nav-active {
             color: var(--color-accent) !important;
             font-weight: 600;
         }
         .skill-bar-fill { background-color: var(--color-accent); }
         .section-bg-alt { background-color: #FFFFFF; }
+
+        /* Dark Theme Specific (for Hero) */
+        .dark-theme {
+            background-color: var(--color-dark-bg);
+            color: var(--color-text-light);
+        }
+        .dark-theme .text-secondary {
+            color: var(--color-secondary);
+        }
+        .dark-theme .text-heading {
+             color: var(--color-text-light);
+        }
 
         /* Animation Styles */
         .animate-on-scroll {
@@ -57,45 +70,46 @@
 <body class="min-h-screen">
 
     <!-- ========== HEADER ========== -->
-    <header class="fixed top-0 left-0 right-0 z-50" style="background-color: rgba(245, 247, 241, 0.8); backdrop-filter: blur(10px);">
+    <header class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300" id="header">
         <nav class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
-                <a href="#hero" class="text-lg font-bold text-accent uppercase tracking-wider">
+                <a href="#hero" class="text-lg font-bold uppercase tracking-wider transition-colors duration-300" id="logo">
                     NAKORN T.
                 </a>
                 <div id="desktop-nav" class="hidden md:flex space-x-4">
-                    <a href="#about" class="nav-link px-3 py-1 transition-colors duration-300 text-text hover:text-accent">About</a>
-                    <a href="#experience" class="nav-link px-3 py-1 transition-colors duration-300 text-text hover:text-accent">Experience</a>
-                    <a href="#projects" class="nav-link px-3 py-1 transition-colors duration-300 text-text hover:text-accent">Projects</a>
-                    <a href="#skills" class="nav-link px-3 py-1 transition-colors duration-300 text-text hover:text-accent">Skills</a>
-                    <a href="#education" class="nav-link px-3 py-1 transition-colors duration-300 text-text hover:text-accent">Education</a>
+                    <a href="#about" class="nav-link px-3 py-1 transition-colors duration-300">About</a>
+                    <a href="#experience" class="nav-link px-3 py-1 transition-colors duration-300">Experience</a>
+                    <a href="#projects" class="nav-link px-3 py-1 transition-colors duration-300">Projects</a>
+                    <a href="#skills" class="nav-link px-3 py-1 transition-colors duration-300">Skills</a>
+                    <a href="#education" class="nav-link px-3 py-1 transition-colors duration-300">Education</a>
                 </div>
-                <button id="mobile-menu-button" class="md:hidden text-text"><i data-lucide="menu"></i></button>
+                <button id="mobile-menu-button" class="md:hidden"><i data-lucide="menu"></i></button>
             </div>
             <div id="mobile-nav" class="hidden md:hidden mt-4 space-y-2">
-                <a href="#about" class="block w-full text-left px-4 py-2 text-text hover:text-accent hover:bg-black/5 rounded-md transition-all">About</a>
-                <a href="#experience" class="block w-full text-left px-4 py-2 text-text hover:text-accent hover:bg-black/5 rounded-md transition-all">Experience</a>
-                <a href="#projects" class="block w-full text-left px-4 py-2 text-text hover:text-accent hover:bg-black/5 rounded-md transition-all">Projects</a>
-                <a href="#skills" class="block w-full text-left px-4 py-2 text-text hover:text-accent hover:bg-black/5 rounded-md transition-all">Skills</a>
-                <a href="#education" class="block w-full text-left px-4 py-2 text-text hover:text-accent hover:bg-black/5 rounded-md transition-all">Education</a>
+                <a href="#about" class="block w-full text-left px-4 py-2 hover:bg-black/5 rounded-md transition-all">About</a>
+                <a href="#experience" class="block w-full text-left px-4 py-2 hover:bg-black/5 rounded-md transition-all">Experience</a>
+                <a href="#projects" class="block w-full text-left px-4 py-2 hover:bg-black/5 rounded-md transition-all">Projects</a>
+                <a href="#skills" class="block w-full text-left px-4 py-2 hover:bg-black/5 rounded-md transition-all">Skills</a>
+                <a href="#education" class="block w-full text-left px-4 py-2 hover:bg-black/5 rounded-md transition-all">Education</a>
             </div>
         </nav>
     </header>
 
     <main>
         <!-- ========== HERO SECTION ========== -->
-        <section id="hero" class="min-h-screen flex items-center justify-center relative pt-20">
+        <section id="hero" class="dark-theme min-h-screen flex items-center justify-center relative pt-20">
+             <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
             <div class="container mx-auto px-6 text-center relative z-10">
-                <h1 class="text-4xl md:text-6xl font-bold mb-2 uppercase text-text animate-on-scroll" style="transition-delay: 100ms;">NAKORN THANTACHAWARAKUL</h1>
+                <h1 class="text-4xl md:text-6xl font-bold mb-2 uppercase text-heading animate-on-scroll" style="transition-delay: 100ms;">NAKORN THANTACHAWARAKUL</h1>
                 <p class="text-md text-secondary font-light mb-8 animate-on-scroll" style="transition-delay: 200ms;">ณกรณ์ ธัญธัชวรากุล</p>
 
-                <p class="text-lg md:text-xl text-text mb-6 max-w-2xl mx-auto animate-on-scroll" style="transition-delay: 300ms;">Business Development & Brand Innovation Strategist</p>
+                <p class="text-lg md:text-xl text-heading mb-6 max-w-2xl mx-auto animate-on-scroll" style="transition-delay: 300ms;">Business Development & Brand Innovation Strategist</p>
                 <p class="text-base text-secondary max-w-3xl mx-auto mb-10 leading-relaxed animate-on-scroll" style="transition-delay: 400ms;">7+ years transforming wellness brands through innovative positioning, creative campaigns, and data-driven marketing strategies.</p>
                 
                 <div class="flex flex-wrap justify-center gap-4 mb-12 animate-on-scroll" style="transition-delay: 500ms;">
-                    <a href="mailto:career@nakoleo.me" class="flex items-center px-6 py-3 bg-accent text-bg rounded-md hover:opacity-90 shadow-lg shadow-accent/20 transition-all font-semibold"><i data-lucide="mail" class="w-4 h-4 mr-2"></i> Contact Me</a>
-                    <a href="Nakorn_Thacthachwarakul_Resume2025+Project.pdf" download="Nakorn_Thanthachwarakul_Resume.pdf" class="flex items-center px-6 py-3 bg-text text-bg rounded-md hover:opacity-90 shadow-lg shadow-text/20 transition-all font-semibold"><i data-lucide="download" class="w-4 h-4 mr-2"></i> Download CV</a>
-                    <a href="https://linkedin.com/in/nakom-leo" target="_blank" rel="noopener noreferrer" class="flex items-center px-6 py-3 border border-secondary text-secondary rounded-md hover:bg-secondary hover:text-bg transition-all font-semibold"><i data-lucide="linkedin" class="w-4 h-4 mr-2"></i> LinkedIn</a>
+                    <a href="mailto:career@nakoleo.me" class="flex items-center px-6 py-3 bg-accent text-dark-bg rounded-md hover:opacity-90 shadow-lg shadow-accent/20 transition-all font-semibold"><i data-lucide="mail" class="w-4 h-4 mr-2"></i> Contact Me</a>
+                    <a href="Nakorn_Thacthachwarakul_Resume2025+Project.pdf" download="Nakorn_T_Resume.pdf" class="flex items-center px-6 py-3 bg-text-light text-dark-bg rounded-md hover:opacity-90 shadow-lg shadow-black/20 transition-all font-semibold"><i data-lucide="download" class="w-4 h-4 mr-2"></i> Download CV</a>
+                    <a href="Nakorn_Thacthachwarakul_Resume2025+Project.pdf" download="Nakorn_T_Portfolio.pdf" class="flex items-center px-6 py-3 border border-secondary text-text-light rounded-md hover:bg-secondary hover:text-dark-bg transition-all font-semibold"><i data-lucide="layout-template" class="w-4 h-4 mr-2"></i> Portfolio</a>
                 </div>
 
                 <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce animate-on-scroll" style="transition-delay: 600ms;"><i data-lucide="arrow-down" class="w-6 h-6 text-accent mx-auto"></i></div>
@@ -105,19 +119,19 @@
         <!-- ========== ABOUT SECTION ========== -->
         <section id="about" class="py-24 section-bg-alt">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-16 text-text uppercase tracking-wider animate-on-scroll">About Me</h2>
+                <h2 class="text-3xl font-bold text-center mb-16 text-text-dark uppercase tracking-wider animate-on-scroll">About Me</h2>
                 <div class="grid md:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
                     <div class="space-y-5 animate-on-scroll" style="transition-delay: 100ms;">
-                        <h3 class="text-xl font-bold text-text mb-3">Professional Summary</h3>
+                        <h3 class="text-xl font-bold text-text-dark mb-3">Professional Summary</h3>
                         <p class="text-secondary leading-relaxed text-sm">Strategic brand and creative marketing leader with 7+ years of experience transforming wellness brands through innovative positioning and compelling creative campaigns. Expert in C-level collaboration, brand identity development, and creative storytelling that drives measurable business growth.</p>
                         <p class="text-secondary leading-relaxed text-sm">Demonstrated success in co-creating brand strategies across 10+ wellness brands while consistently delivering breakthrough creative solutions that resonate with target audiences and exceed conversion targets.</p>
                     </div>
                     <div class="space-y-4 animate-on-scroll" style="transition-delay: 200ms;">
-                        <h3 class="text-xl font-bold text-text mb-4">Core Competencies</h3>
+                        <h3 class="text-xl font-bold text-text-dark mb-4">Core Competencies</h3>
                         <div class="grid gap-4">
-                            <div class="flex items-start space-x-4"><i data-lucide="target" class="w-5 h-5 text-accent mt-1 flex-shrink-0"></i><div><h4 class="text-text font-semibold text-base">Strategic Leadership</h4><p class="text-secondary text-sm">C-level collaboration & project management</p></div></div>
-                            <div class="flex items-start space-x-4"><i data-lucide="palette" class="w-5 h-5 text-accent mt-1 flex-shrink-0"></i><div><h4 class="text-text font-semibold text-base">Creative Excellence</h4><p class="text-secondary text-sm">Brand identity & visual storytelling</p></div></div>
-                            <div class="flex items-start space-x-4"><i data-lucide="trending-up" class="w-5 h-5 text-accent mt-1 flex-shrink-0"></i><div><h4 class="text-text font-semibold text-base">Marketing Science</h4><p class="text-secondary text-sm">Data analytics & ROI optimization</p></div></div>
+                            <div class="flex items-start space-x-4"><i data-lucide="target" class="w-5 h-5 text-accent mt-1 flex-shrink-0"></i><div><h4 class="text-text-dark font-semibold text-base">Strategic Leadership</h4><p class="text-secondary text-sm">C-level collaboration & project management</p></div></div>
+                            <div class="flex items-start space-x-4"><i data-lucide="palette" class="w-5 h-5 text-accent mt-1 flex-shrink-0"></i><div><h4 class="text-text-dark font-semibold text-base">Creative Excellence</h4><p class="text-secondary text-sm">Brand identity & visual storytelling</p></div></div>
+                            <div class="flex items-start space-x-4"><i data-lucide="trending-up" class="w-5 h-5 text-accent mt-1 flex-shrink-0"></i><div><h4 class="text-text-dark font-semibold text-base">Marketing Science</h4><p class="text-secondary text-sm">Data analytics & ROI optimization</p></div></div>
                         </div>
                     </div>
                 </div>
@@ -127,32 +141,15 @@
         <!-- ========== EXPERIENCE SECTION ========== -->
         <section id="experience" class="py-24">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-16 text-text uppercase tracking-wider animate-on-scroll">Professional Experience</h2>
+                <h2 class="text-3xl font-bold text-center mb-16 text-text-dark uppercase tracking-wider animate-on-scroll">Professional Experience</h2>
                 <div class="max-w-3xl mx-auto">
                     <!-- Experience Item Loop -->
-                    <div class="relative mb-12 animate-on-scroll">
-                        <div class="absolute left-4 top-4 -bottom-12 w-px bg-gray-200"></div>
-                        <div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="briefcase" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="flex flex-wrap items-start justify-between mb-1"><div><h3 class="text-lg font-bold text-text">Acting Marketing Director</h3><p class="text-accent font-semibold text-sm">Slim Up Center (The Marine Group)</p></div><p class="text-secondary text-xs mt-1">Oct 2022 – Dec 2024</p></div><ul class="space-y-2 mt-2 list-disc list-inside"><li class="text-secondary text-sm">Led AI Digital Tailor-Made campaign featured on Woody Channel, generating 297 qualified leads on launch day.</li><li class="text-secondary text-sm">Implemented centralized martech ecosystem across 19 branches with 95% lead-to-booking conversion.</li></ul></div></div>
-                    </div>
-                     <div class="relative mb-12 animate-on-scroll">
-                        <div class="absolute left-4 top-4 -bottom-12 w-px bg-gray-200"></div>
-                        <div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="briefcase" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="flex flex-wrap items-start justify-between mb-1"><div><h3 class="text-lg font-bold text-text">Marketing Manager & Business Development</h3><p class="text-accent font-semibold text-sm">Harmony Life Center</p></div><p class="text-secondary text-xs mt-1">Oct 2023 – Jul 2024</p></div><ul class="space-y-2 mt-2 list-disc list-inside"><li class="text-secondary text-sm">Developed brand identity and go-to-market strategy for premium anti-aging clinic at CentralWorld.</li><li class="text-secondary text-sm">Achieved 20% increase in monthly revenue through influencer marketing campaigns.</li></ul></div></div>
-                    </div>
-                    <div class="relative mb-12 animate-on-scroll">
-                        <div class="absolute left-4 top-4 -bottom-12 w-px bg-gray-200"></div>
-                        <div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="briefcase" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="flex flex-wrap items-start justify-between mb-1"><div><h3 class="text-lg font-bold text-text">Assistant Clinic Manager and Marketing</h3><p class="text-accent font-semibold text-sm">BWM Clinic</p></div><p class="text-secondary text-xs mt-1">Oct 2021 – Sep 2022</p></div><ul class="space-y-2 mt-2 list-disc list-inside"><li class="text-secondary text-sm">Managed the end-to-end licensing process for medical facilities, ensuring regulatory compliance.</li><li class="text-secondary text-sm">Enhanced the customer experience through tailored service models, improving customer retention.</li></ul></div></div>
-                    </div>
-                    <div class="relative mb-12 animate-on-scroll">
-                        <div class="absolute left-4 top-4 -bottom-12 w-px bg-gray-200"></div>
-                        <div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="briefcase" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="flex flex-wrap items-start justify-between mb-1"><div><h3 class="text-lg font-bold text-text">Senior Designer & Marketing</h3><p class="text-accent font-semibold text-sm">BAAC Clinic</p></div><p class="text-secondary text-xs mt-1">Mar 2019 – Sep 2021</p></div><ul class="space-y-2 mt-2 list-disc list-inside"><li class="text-secondary text-sm">Led Health Check-Up campaigns with GoWabi, HD Mall, and MCOT Radio.</li><li class="text-secondary text-sm">Strengthened brand messaging and visual identity across multiple channels.</li></ul></div></div>
-                    </div>
-                    <div class="relative mb-12 animate-on-scroll">
-                        <div class="absolute left-4 top-4 -bottom-12 w-px bg-gray-200"></div>
-                        <div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="briefcase" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="flex flex-wrap items-start justify-between mb-1"><div><h3 class="text-lg font-bold text-text">Customer Service Representative</h3><p class="text-accent font-semibold text-sm">AIS Flagship Store</p></div><p class="text-secondary text-xs mt-1">Sep 2018 – Feb 2019</p></div><ul class="space-y-2 mt-2 list-disc list-inside"><li class="text-secondary text-sm">Advised customers on mobile devices, service plans, and technical support, maintaining high satisfaction ratings.</li></ul></div></div>
-                    </div>
-                    <div class="relative mb-0 animate-on-scroll">
-                        <div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="briefcase" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="flex flex-wrap items-start justify-between mb-1"><div><h3 class="text-lg font-bold text-text">Junior Graphic Designer</h3><p class="text-accent font-semibold text-sm">Exotic Food PCL</p></div><p class="text-secondary text-xs mt-1">Sep 2017 – Aug 2018</p></div><ul class="space-y-2 mt-2 list-disc list-inside"><li class="text-secondary text-sm">Designed branding assets, advertising materials, and packaging, enhancing product appeal and market reach.</li></ul></div></div>
-                    </div>
+                    <div class="relative mb-12 animate-on-scroll"><div class="absolute left-4 top-4 -bottom-12 w-px bg-gray-200"></div><div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="briefcase" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="flex flex-wrap items-start justify-between mb-1"><div><h3 class="text-lg font-bold text-text-dark">Acting Marketing Director</h3><p class="text-accent font-semibold text-sm">Slim Up Center (The Marine Group)</p></div><p class="text-secondary text-xs mt-1">Oct 2022 – Dec 2024</p></div><ul class="space-y-2 mt-2 list-disc list-inside"><li class="text-secondary text-sm">Led AI Digital Tailor-Made campaign featured on Woody Channel, generating 297 qualified leads on launch day.</li><li class="text-secondary text-sm">Implemented centralized martech ecosystem across 19 branches with 95% lead-to-booking conversion.</li></ul></div></div></div>
+                    <div class="relative mb-12 animate-on-scroll"><div class="absolute left-4 top-4 -bottom-12 w-px bg-gray-200"></div><div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="briefcase" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="flex flex-wrap items-start justify-between mb-1"><div><h3 class="text-lg font-bold text-text-dark">Marketing Manager & Business Development</h3><p class="text-accent font-semibold text-sm">Harmony Life Center</p></div><p class="text-secondary text-xs mt-1">Oct 2023 – Jul 2024</p></div><ul class="space-y-2 mt-2 list-disc list-inside"><li class="text-secondary text-sm">Developed brand identity and go-to-market strategy for premium anti-aging clinic at CentralWorld.</li><li class="text-secondary text-sm">Achieved 20% increase in monthly revenue through influencer marketing campaigns.</li></ul></div></div></div>
+                    <div class="relative mb-12 animate-on-scroll"><div class="absolute left-4 top-4 -bottom-12 w-px bg-gray-200"></div><div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="briefcase" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="flex flex-wrap items-start justify-between mb-1"><div><h3 class="text-lg font-bold text-text-dark">Assistant Clinic Manager and Marketing</h3><p class="text-accent font-semibold text-sm">BWM Clinic</p></div><p class="text-secondary text-xs mt-1">Oct 2021 – Sep 2022</p></div><ul class="space-y-2 mt-2 list-disc list-inside"><li class="text-secondary text-sm">Managed the end-to-end licensing process for medical facilities, ensuring regulatory compliance.</li><li class="text-secondary text-sm">Enhanced the customer experience through tailored service models, improving customer retention.</li></ul></div></div></div>
+                    <div class="relative mb-12 animate-on-scroll"><div class="absolute left-4 top-4 -bottom-12 w-px bg-gray-200"></div><div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="briefcase" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="flex flex-wrap items-start justify-between mb-1"><div><h3 class="text-lg font-bold text-text-dark">Senior Designer & Marketing</h3><p class="text-accent font-semibold text-sm">BAAC Clinic</p></div><p class="text-secondary text-xs mt-1">Mar 2019 – Sep 2021</p></div><ul class="space-y-2 mt-2 list-disc list-inside"><li class="text-secondary text-sm">Led Health Check-Up campaigns with GoWabi, HD Mall, and MCOT Radio.</li><li class="text-secondary text-sm">Strengthened brand messaging and visual identity across multiple channels.</li></ul></div></div></div>
+                    <div class="relative mb-12 animate-on-scroll"><div class="absolute left-4 top-4 -bottom-12 w-px bg-gray-200"></div><div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="briefcase" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="flex flex-wrap items-start justify-between mb-1"><div><h3 class="text-lg font-bold text-text-dark">Customer Service Representative</h3><p class="text-accent font-semibold text-sm">AIS Flagship Store</p></div><p class="text-secondary text-xs mt-1">Sep 2018 – Feb 2019</p></div><ul class="space-y-2 mt-2 list-disc list-inside"><li class="text-secondary text-sm">Advised customers on mobile devices, service plans, and technical support, maintaining high satisfaction ratings.</li></ul></div></div></div>
+                    <div class="relative mb-0 animate-on-scroll"><div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="briefcase" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="flex flex-wrap items-start justify-between mb-1"><div><h3 class="text-lg font-bold text-text-dark">Junior Graphic Designer</h3><p class="text-accent font-semibold text-sm">Exotic Food PCL</p></div><p class="text-secondary text-xs mt-1">Sep 2017 – Aug 2018</p></div><ul class="space-y-2 mt-2 list-disc list-inside"><li class="text-secondary text-sm">Designed branding assets, advertising materials, and packaging, enhancing product appeal and market reach.</li></ul></div></div></div>
                 </div>
             </div>
         </section>
@@ -160,14 +157,14 @@
         <!-- ========== PROJECTS SECTION ========== -->
         <section id="projects" class="py-24 section-bg-alt">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-12 text-text uppercase tracking-wider animate-on-scroll">Key Projects</h2>
+                <h2 class="text-3xl font-bold text-center mb-12 text-text-dark uppercase tracking-wider animate-on-scroll">Key Projects</h2>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="animate-on-scroll bg-bg rounded-lg p-5 border border-transparent hover:border-accent/50 transition-colors duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl hover:shadow-accent/10"><div class="flex items-center text-accent mb-3"><i data-lucide="lightbulb" class="w-5 h-5 mr-3"></i><span class="text-xs uppercase tracking-widest font-semibold">Brand Portfolio</span></div><h3 class="text-base font-bold text-text mb-2">The Marine Group Compendium</h3><p class="text-secondary text-sm leading-relaxed">Strategic document compiling identities and visions of 13 brands to enhance market credibility and investor confidence.</p></div>
-                    <div class="animate-on-scroll bg-bg rounded-lg p-5 border border-transparent hover:border-accent/50 transition-colors duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl hover:shadow-accent/10" style="transition-delay: 100ms;"><div class="flex items-center text-accent mb-3"><i data-lucide="gem" class="w-5 h-5 mr-3"></i><span class="text-xs uppercase tracking-widest font-semibold">VVIP CRM</span></div><h3 class="text-base font-bold text-text mb-2">Project Diamond Customer</h3><p class="text-secondary text-sm leading-relaxed">Flagship CRM for high-value customers, leveraging data analysis for personalized 1:1 marketing and service packages.</p></div>
-                    <div class="animate-on-scroll bg-bg rounded-lg p-5 border border-transparent hover:border-accent/50 transition-colors duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl hover:shadow-accent/10" style="transition-delay: 200ms;"><div class="flex items-center text-accent mb-3"><i data-lucide="refresh-cw" class="w-5 h-5 mr-3"></i><span class="text-xs uppercase tracking-widest font-semibold">Digital Transformation</span></div><h3 class="text-base font-bold text-text mb-2">Nutrition Record Data</h3><p class="text-secondary text-sm leading-relaxed">Transformed paper health records into a centralized database for precise, data-driven marketing strategies.</p></div>
-                    <div class="animate-on-scroll bg-bg rounded-lg p-5 border border-transparent hover:border-accent/50 transition-colors duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl hover:shadow-accent/10" style="transition-delay: 300ms;"><div class="flex items-center text-accent mb-3"><i data-lucide="bot" class="w-5 h-5 mr-3"></i><span class="text-xs uppercase tracking-widest font-semibold">AI & Automation</span></div><h3 class="text-base font-bold text-text mb-2">Social Insight & AI FAQ</h3><p class="text-secondary text-sm leading-relaxed">Aggregated social media data with AI processing to create a standardized FAQ manual and future-proof chatbot integration.</p></div>
-                    <div class="animate-on-scroll bg-bg rounded-lg p-5 border border-transparent hover:border-accent/50 transition-colors duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl hover:shadow-accent/10" style="transition-delay: 400ms;"><div class="flex items-center text-accent mb-3"><i data-lucide="cpu" class="w-5 h-5 mr-3"></i><span class="text-xs uppercase tracking-widest font-semibold">Tech Integration</span></div><h3 class="text-base font-bold text-text mb-2">LINE Customer CRM</h3><p class="text-secondary text-sm leading-relaxed">Centralized CRM system on LINE for automated, targeted campaigns and cross-branch performance insights.</p></div>
-                    <div class="animate-on-scroll bg-bg rounded-lg p-5 border border-transparent hover:border-accent/50 transition-colors duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl hover:shadow-accent/10" style="transition-delay: 500ms;"><div class="flex items-center text-accent mb-3"><i data-lucide="rocket" class="w-5 h-5 mr-3"></i><span class="text-xs uppercase tracking-widest font-semibold">Growth Strategy</span></div><h3 class="text-base font-bold text-text mb-2">Affiliate Marketing Expansion</h3><p class="text-secondary text-sm leading-relaxed">Expanded distribution channels via affiliate networks with robust tracking and transparent commission models.</p></div>
+                    <div class="animate-on-scroll bg-bg rounded-lg p-5 border border-transparent hover:border-accent/50 transition-colors duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl hover:shadow-accent/10"><div class="flex items-center text-accent mb-3"><i data-lucide="lightbulb" class="w-5 h-5 mr-3"></i><span class="text-xs uppercase tracking-widest font-semibold">Brand Portfolio</span></div><h3 class="text-base font-bold text-text-dark mb-2">The Marine Group Compendium</h3><p class="text-secondary text-sm leading-relaxed">Strategic document compiling identities and visions of 13 brands to enhance market credibility and investor confidence.</p></div>
+                    <div class="animate-on-scroll bg-bg rounded-lg p-5 border border-transparent hover:border-accent/50 transition-colors duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl hover:shadow-accent/10" style="transition-delay: 100ms;"><div class="flex items-center text-accent mb-3"><i data-lucide="gem" class="w-5 h-5 mr-3"></i><span class="text-xs uppercase tracking-widest font-semibold">VVIP CRM</span></div><h3 class="text-base font-bold text-text-dark mb-2">Project Diamond Customer</h3><p class="text-secondary text-sm leading-relaxed">Flagship CRM for high-value customers, leveraging data analysis for personalized 1:1 marketing and service packages.</p></div>
+                    <div class="animate-on-scroll bg-bg rounded-lg p-5 border border-transparent hover:border-accent/50 transition-colors duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl hover:shadow-accent/10" style="transition-delay: 200ms;"><div class="flex items-center text-accent mb-3"><i data-lucide="refresh-cw" class="w-5 h-5 mr-3"></i><span class="text-xs uppercase tracking-widest font-semibold">Digital Transformation</span></div><h3 class="text-base font-bold text-text-dark mb-2">Nutrition Record Data</h3><p class="text-secondary text-sm leading-relaxed">Transformed paper health records into a centralized database for precise, data-driven marketing strategies.</p></div>
+                    <div class="animate-on-scroll bg-bg rounded-lg p-5 border border-transparent hover:border-accent/50 transition-colors duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl hover:shadow-accent/10" style="transition-delay: 300ms;"><div class="flex items-center text-accent mb-3"><i data-lucide="bot" class="w-5 h-5 mr-3"></i><span class="text-xs uppercase tracking-widest font-semibold">AI & Automation</span></div><h3 class="text-base font-bold text-text-dark mb-2">Social Insight & AI FAQ</h3><p class="text-secondary text-sm leading-relaxed">Aggregated social media data with AI processing to create a standardized FAQ manual and future-proof chatbot integration.</p></div>
+                    <div class="animate-on-scroll bg-bg rounded-lg p-5 border border-transparent hover:border-accent/50 transition-colors duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl hover:shadow-accent/10" style="transition-delay: 400ms;"><div class="flex items-center text-accent mb-3"><i data-lucide="cpu" class="w-5 h-5 mr-3"></i><span class="text-xs uppercase tracking-widest font-semibold">Tech Integration</span></div><h3 class="text-base font-bold text-text-dark mb-2">LINE Customer CRM</h3><p class="text-secondary text-sm leading-relaxed">Centralized CRM system on LINE for automated, targeted campaigns and cross-branch performance insights.</p></div>
+                    <div class="animate-on-scroll bg-bg rounded-lg p-5 border border-transparent hover:border-accent/50 transition-colors duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl hover:shadow-accent/10" style="transition-delay: 500ms;"><div class="flex items-center text-accent mb-3"><i data-lucide="rocket" class="w-5 h-5 mr-3"></i><span class="text-xs uppercase tracking-widest font-semibold">Growth Strategy</span></div><h3 class="text-base font-bold text-text-dark mb-2">Affiliate Marketing Expansion</h3><p class="text-secondary text-sm leading-relaxed">Expanded distribution channels via affiliate networks with robust tracking and transparent commission models.</p></div>
                 </div>
             </div>
         </section>
@@ -175,28 +172,28 @@
         <!-- ========== SKILLS SECTION ========== -->
         <section id="skills" class="py-24">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-16 text-text uppercase tracking-wider animate-on-scroll">Skills & Expertise</h2>
+                <h2 class="text-3xl font-bold text-center mb-16 text-text-dark uppercase tracking-wider animate-on-scroll">Skills & Expertise</h2>
                 <div class="max-w-5xl mx-auto">
                     <div class="grid md:grid-cols-2 gap-12 mb-10">
                         <div class="animate-on-scroll">
-                            <h3 class="text-xl font-bold text-text mb-6 flex items-center"><i data-lucide="code" class="w-5 h-5 mr-3 text-accent"></i>Technical Skills</h3>
+                            <h3 class="text-xl font-bold text-text-dark mb-6 flex items-center"><i data-lucide="code" class="w-5 h-5 mr-3 text-accent"></i>Technical Skills</h3>
                             <div class="space-y-5">
-                                <div><div class="flex justify-between items-center mb-1"><span class="text-text font-medium text-sm">Google Analytics & Looker Studio</span><span class="text-accent text-xs font-semibold">90%</span></div><div class="w-full bg-gray-200 rounded-full h-1.5"><div class="skill-bar-fill h-1.5 rounded-full" style="width: 90%;"></div></div></div>
-                                <div><div class="flex justify-between items-center mb-1"><span class="text-text font-medium text-sm">Adobe Creative Cloud</span><span class="text-accent text-xs font-semibold">95%</span></div><div class="w-full bg-gray-200 rounded-full h-1.5"><div class="skill-bar-fill h-1.5 rounded-full" style="width: 95%;"></div></div></div>
-                                <div><div class="flex justify-between items-center mb-1"><span class="text-text font-medium text-sm">AI Tools (ChatGPT, Claude)</span><span class="text-accent text-xs font-semibold">85%</span></div><div class="w-full bg-gray-200 rounded-full h-1.5"><div class="skill-bar-fill h-1.5 rounded-full" style="width: 85%;"></div></div></div>
+                                <div><div class="flex justify-between items-center mb-1"><span class="text-text-dark font-medium text-sm">Google Analytics & Looker Studio</span><span class="text-accent text-xs font-semibold">90%</span></div><div class="w-full bg-gray-200 rounded-full h-1.5"><div class="skill-bar-fill h-1.5 rounded-full" style="width: 90%;"></div></div></div>
+                                <div><div class="flex justify-between items-center mb-1"><span class="text-text-dark font-medium text-sm">Adobe Creative Cloud</span><span class="text-accent text-xs font-semibold">95%</span></div><div class="w-full bg-gray-200 rounded-full h-1.5"><div class="skill-bar-fill h-1.5 rounded-full" style="width: 95%;"></div></div></div>
+                                <div><div class="flex justify-between items-center mb-1"><span class="text-text-dark font-medium text-sm">AI Tools (ChatGPT, Claude)</span><span class="text-accent text-xs font-semibold">85%</span></div><div class="w-full bg-gray-200 rounded-full h-1.5"><div class="skill-bar-fill h-1.5 rounded-full" style="width: 85%;"></div></div></div>
                             </div>
                         </div>
                          <div class="animate-on-scroll" style="transition-delay: 100ms;">
-                            <h3 class="text-xl font-bold text-text mb-6 flex items-center"><i data-lucide="users" class="w-5 h-5 mr-3 text-accent"></i>Soft Skills</h3>
+                            <h3 class="text-xl font-bold text-text-dark mb-6 flex items-center"><i data-lucide="users" class="w-5 h-5 mr-3 text-accent"></i>Soft Skills</h3>
                             <div class="space-y-5">
-                                 <div><div class="flex justify-between items-center mb-1"><span class="text-text font-medium text-sm">Strategic Leadership</span><span class="text-accent text-xs font-semibold">95%</span></div><div class="w-full bg-gray-200 rounded-full h-1.5"><div class="skill-bar-fill h-1.5 rounded-full" style="width: 95%;"></div></div></div>
-                                 <div><div class="flex justify-between items-center mb-1"><span class="text-text font-medium text-sm">Creative Direction</span><span class="text-accent text-xs font-semibold">90%</span></div><div class="w-full bg-gray-200 rounded-full h-1.5"><div class="skill-bar-fill h-1.5 rounded-full" style="width: 90%;"></div></div></div>
-                                 <div><div class="flex justify-between items-center mb-1"><span class="text-text font-medium text-sm">Project Management</span><span class="text-accent text-xs font-semibold">88%</span></div><div class="w-full bg-gray-200 rounded-full h-1.5"><div class="skill-bar-fill h-1.5 rounded-full" style="width: 88%;"></div></div></div>
+                                 <div><div class="flex justify-between items-center mb-1"><span class="text-text-dark font-medium text-sm">Strategic Leadership</span><span class="text-accent text-xs font-semibold">95%</span></div><div class="w-full bg-gray-200 rounded-full h-1.5"><div class="skill-bar-fill h-1.5 rounded-full" style="width: 95%;"></div></div></div>
+                                 <div><div class="flex justify-between items-center mb-1"><span class="text-text-dark font-medium text-sm">Creative Direction</span><span class="text-accent text-xs font-semibold">90%</span></div><div class="w-full bg-gray-200 rounded-full h-1.5"><div class="skill-bar-fill h-1.5 rounded-full" style="width: 90%;"></div></div></div>
+                                 <div><div class="flex justify-between items-center mb-1"><span class="text-text-dark font-medium text-sm">Project Management</span><span class="text-accent text-xs font-semibold">88%</span></div><div class="w-full bg-gray-200 rounded-full h-1.5"><div class="skill-bar-fill h-1.5 rounded-full" style="width: 88%;"></div></div></div>
                             </div>
                         </div>
                     </div>
                      <div class="animate-on-scroll" style="transition-delay: 200ms;">
-                        <h3 class="text-xl font-bold text-text mb-6 flex items-center"><i data-lucide="sparkles" class="w-5 h-5 mr-3 text-accent"></i>Tools & Platforms</h3>
+                        <h3 class="text-xl font-bold text-text-dark mb-6 flex items-center"><i data-lucide="sparkles" class="w-5 h-5 mr-3 text-accent"></i>Tools & Platforms</h3>
                         <div class="flex flex-wrap gap-2">
                              <span class="bg-gray-200 text-secondary text-xs font-medium px-3 py-1 rounded-full">Tableau</span>
                              <span class="bg-gray-200 text-secondary text-xs font-medium px-3 py-1 rounded-full">AppSheet</span>
@@ -217,17 +214,17 @@
         <!-- ========== EDUCATION SECTION ========== -->
         <section id="education" class="py-24 section-bg-alt">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-12 text-text uppercase tracking-wider animate-on-scroll">Education & Recognition</h2>
+                <h2 class="text-3xl font-bold text-center mb-12 text-text-dark uppercase tracking-wider animate-on-scroll">Education & Recognition</h2>
                 <div class="max-w-4xl mx-auto">
                     <div class="bg-bg rounded-lg p-6 border animate-on-scroll">
                         <div class="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6">
                             <div class="w-14 h-14 bg-accent rounded-full flex items-center justify-center flex-shrink-0"><i data-lucide="graduation-cap" class="w-7 h-7 text-bg"></i></div>
                             <div class="flex-grow">
-                                <h3 class="text-lg font-bold text-text">Bachelor of Fine Arts in Computer Graphics</h3>
+                                <h3 class="text-lg font-bold text-text-dark">Bachelor of Fine Arts in Computer Graphics</h3>
                                 <p class="text-accent font-semibold text-base mb-3">Dhurakij Pundit University (DPU)</p>
                                 <div class="grid md:grid-cols-2 gap-4">
-                                    <div class="flex items-center space-x-3"><i data-lucide="trophy" class="w-5 h-5 text-accent"></i><div><p class="text-text font-semibold text-sm">First Class Honors</p><p class="text-secondary text-xs">GPA: 3.73</p></div></div>
-                                    <div class="flex items-center space-x-3"><i data-lucide="award" class="w-5 h-5 text-accent"></i><div><p class="text-text font-semibold text-sm">Noparat Gold Medal</p><p class="text-secondary text-xs">Academic Excellence</p></div></div>
+                                    <div class="flex items-center space-x-3"><i data-lucide="trophy" class="w-5 h-5 text-accent"></i><div><p class="text-text-dark font-semibold text-sm">First Class Honors</p><p class="text-secondary text-xs">GPA: 3.73</p></div></div>
+                                    <div class="flex items-center space-x-3"><i data-lucide="award" class="w-5 h-5 text-accent"></i><div><p class="text-text-dark font-semibold text-sm">Noparat Gold Medal</p><p class="text-secondary text-xs">Academic Excellence</p></div></div>
                                 </div>
                             </div>
                         </div>
@@ -241,13 +238,13 @@
     <footer class="py-12 bg-white">
         <div class="container mx-auto px-6 text-center">
             <div class="mb-5">
-                <h3 class="text-xl font-bold text-text mb-1">Let's Connect</h3>
+                <h3 class="text-xl font-bold text-text-dark mb-1">Let's Connect</h3>
                 <p class="text-secondary text-sm">Ready to transform your brand with innovative marketing strategies?</p>
             </div>
             <div class="flex justify-center space-x-4 mb-6">
-                <a href="mailto:career@nakoleo.me" class="w-10 h-10 bg-text text-bg rounded-full flex items-center justify-center hover:bg-accent transition-colors"><i data-lucide="mail" class="w-5 h-5"></i></a>
-                <a href="https://linkedin.com/in/nakom-leo" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-text text-bg rounded-full flex items-center justify-center hover:bg-accent transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-                <a href="https://portfolio.nakoleo.me" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-text text-bg rounded-full flex items-center justify-center hover:bg-accent transition-colors"><i data-lucide="globe" class="w-5 h-5"></i></a>
+                <a href="mailto:career@nakoleo.me" class="w-10 h-10 bg-text-dark text-bg rounded-full flex items-center justify-center hover:bg-accent transition-colors"><i data-lucide="mail" class="w-5 h-5"></i></a>
+                <a href="https://linkedin.com/in/nakom-leo" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-text-dark text-bg rounded-full flex items-center justify-center hover:bg-accent transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                <a href="https://portfolio.nakoleo.me" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-text-dark text-bg rounded-full flex items-center justify-center hover:bg-accent transition-colors"><i data-lucide="globe" class="w-5 h-5"></i></a>
             </div>
             <div class="border-t pt-5">
                 <p class="text-secondary text-xs">&copy; 2024 Nakorn Thanthachwarakul. All Rights Reserved.</p>
@@ -260,29 +257,53 @@
         lucide.createIcons();
 
         document.addEventListener('DOMContentLoaded', () => {
-            const menuButton = document.getElementById('mobile-menu-button');
+            const header = document.getElementById('header');
+            const logo = document.getElementById('logo');
+            const desktopNavLinks = document.querySelectorAll('#desktop-nav .nav-link');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileNav = document.getElementById('mobile-nav');
-            menuButton.addEventListener('click', () => {
+
+            // --- Header style on scroll ---
+            const handleScroll = () => {
+                if (window.scrollY > 50) {
+                    header.style.backgroundColor = 'rgba(245, 247, 241, 0.8)';
+                    header.style.boxShadow = '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)';
+                    logo.style.color = 'var(--color-accent)';
+                    desktopNavLinks.forEach(link => link.style.color = 'var(--color-text-dark)');
+                    mobileMenuButton.style.color = 'var(--color-text-dark)';
+                } else {
+                    header.style.backgroundColor = 'transparent';
+                    header.style.boxShadow = 'none';
+                    logo.style.color = 'var(--color-accent)';
+                    desktopNavLinks.forEach(link => link.style.color = 'var(--color-text-light)');
+                    mobileMenuButton.style.color = 'var(--color-text-light)';
+                }
+            };
+            window.addEventListener('scroll', handleScroll);
+            handleScroll(); // Initial check
+
+            // --- Mobile Menu Toggle ---
+            mobileMenuButton.addEventListener('click', () => {
                 const isHidden = mobileNav.classList.toggle('hidden');
-                menuButton.querySelector('i').setAttribute('data-lucide', isHidden ? 'menu' : 'x');
+                mobileMenuButton.querySelector('i').setAttribute('data-lucide', isHidden ? 'menu' : 'x');
                 lucide.createIcons();
             });
 
              mobileNav.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
                     mobileNav.classList.add('hidden');
-                    menuButton.querySelector('i').setAttribute('data-lucide', 'menu');
+                    mobileMenuButton.querySelector('i').setAttribute('data-lucide', 'menu');
                     lucide.createIcons();
                 });
             });
 
-            const navLinks = document.querySelectorAll('#desktop-nav .nav-link');
+            // --- Active Nav Link on Scroll ---
             const navObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     const id = entry.target.getAttribute('id');
                     const navLink = document.querySelector(`.nav-link[href="#${id}"]`);
                     if (entry.isIntersecting) {
-                        navLinks.forEach(link => link.classList.remove('nav-active'));
+                        desktopNavLinks.forEach(link => link.classList.remove('nav-active'));
                         if (navLink) navLink.classList.add('nav-active');
                     }
                 });
@@ -290,6 +311,7 @@
 
             document.querySelectorAll('section').forEach(section => navObserver.observe(section));
             
+            // --- Animation on Scroll ---
             const animationObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
