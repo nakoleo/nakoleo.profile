@@ -3,13 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nakorn Thanthachwarakul - Resume</title>
+    <title>Nakorn Thanthachwarakul - Marketing Director & Brand Strategist</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Nakorn Thanthachwarakul - Strategic brand and creative marketing leader with 7+ years of experience transforming wellness brands through innovative positioning and compelling creative campaigns.">
+    <meta name="keywords" content="Marketing Director, Brand Strategy, Digital Marketing, Healthcare Marketing, Business Development, Thailand">
+    <meta name="author" content="Nakorn Thanthachwarakul">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Nakorn Thanthachwarakul - Marketing Director & Brand Strategist">
+    <meta property="og:description" content="Strategic brand and creative marketing leader with 7+ years of experience transforming wellness brands">
+    <meta property="og:image" content="https://i.postimg.cc/T35jzBT0/Nakorn-Ai-02.png">
+    <meta property="og:url" content="https://portfolio.nakoleo.me">
+    <meta property="og:type" content="website">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Custom Styles -->
     <style>
@@ -21,17 +36,23 @@
             --color-accent: #D4B17A; /* Champagne Gold */
             --color-secondary: #8892b0; /* Slate-400 equivalent for secondary text */
         }
+        
+        * {
+            font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        
         html {
-             -webkit-font-smoothing: antialiased;
+            -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
+        
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background-color: var(--color-bg);
             color: var(--color-text-dark);
             overflow-x: hidden;
             padding-bottom: 100px; /* Add padding for the contact bar */
         }
+        
         /* Light Theme */
         .text-accent { color: var(--color-accent); }
         .bg-accent { background-color: var(--color-accent); }
@@ -54,6 +75,40 @@
         }
         .dark-theme .text-heading {
              color: var(--color-text-light);
+        }
+
+        /* Loading Animation */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--color-dark-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--color-secondary);
+            border-top: 3px solid var(--color-accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Animation Styles */
@@ -96,6 +151,7 @@
             font-weight: 600;
             text-decoration: none;
             transition: all 0.3s ease;
+            font-size: 0.875rem;
         }
         .contact-button:hover {
             transform: translateY(-2px);
@@ -110,9 +166,37 @@
             color: white;
         }
 
+        /* Improved hover effects */
+        .project-card {
+            transition: all 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-accent);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b8965f;
+        }
+
     </style>
 </head>
 <body class="min-h-screen">
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+    </div>
 
     <!-- ========== HEADER ========== -->
     <header class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300" id="header">
@@ -148,59 +232,77 @@
                 <img src="https://i.postimg.cc/T35jzBT0/Nakorn-Ai-02.png" alt="Nakorn Thanthachwarakul" class="w-32 h-32 mx-auto mb-6 rounded-full object-cover border-4 border-accent shadow-lg animate-on-scroll">
                 <h1 class="text-4xl md:text-6xl font-bold mb-2 uppercase text-heading animate-on-scroll" style="transition-delay: 100ms;">NAKORN THANTACHAWARAKUL</h1>
                 <p class="text-md text-secondary font-light mb-8 animate-on-scroll" style="transition-delay: 200ms;">ณกรณ์ ธัญธัชวรากุล</p>
-                <p class="text-lg md:text-xl text-heading mb-6 max-w-2xl mx-auto animate-on-scroll" style="transition-delay: 300ms;">Business Development & Brand Innovation Strategist</p>
-                <p class="text-base text-secondary max-w-3xl mx-auto mb-10 leading-relaxed animate-on-scroll" style="transition-delay: 400ms;">7+ years transforming wellness brands through innovative positioning, creative campaigns, and data-driven marketing strategies.</p>
+                <p class="text-lg md:text-xl text-heading mb-6 max-w-2xl mx-auto animate-on-scroll" style="transition-delay: 300ms;">Marketing Director & Brand Innovation Strategist</p>
+                <p class="text-base text-secondary max-w-3xl mx-auto mb-10 leading-relaxed animate-on-scroll" style="transition-delay: 400ms;">นักกลยุทธ์การตลาดและการสร้างแบรนด์ที่มีประสบการณ์ 7+ ปี ในการเปลี่ยนแปลงแบรนด์ธุรกิจสุขภาพและความงามผ่านกลยุทธ์การตลาดดิจิทัลที่สร้างสรรค์และผลลัพธ์ที่วัดผลได้</p>
                 <div class="flex flex-wrap justify-center gap-4 mb-12 animate-on-scroll" style="transition-delay: 500ms;">
-                    <a href="mailto:career@nakoleo.me" class="flex items-center px-6 py-3 bg-accent text-dark-bg rounded-md hover:opacity-90 shadow-lg shadow-accent/20 transition-all font-semibold"><i data-lucide="mail" class="w-4 h-4 mr-2"></i> Contact Me</a>
-                    <a href="Nakorn_Thacthachwarakul_Resume2025+Project.pdf" download="Nakorn_T_Resume.pdf" class="flex items-center px-6 py-3 bg-text-light text-dark-bg rounded-md hover:opacity-90 shadow-lg shadow-black/20 transition-all font-semibold"><i data-lucide="download" class="w-4 h-4 mr-2"></i> Download CV</a>
-                    <a href="Nakorn_Thacthachwarakul_Resume2025+Project.pdf" download="Nakorn_T_Portfolio.pdf" class="flex items-center px-6 py-3 border border-secondary text-text-light rounded-md hover:bg-secondary hover:text-dark-bg transition-all font-semibold"><i data-lucide="layout-template" class="w-4 h-4 mr-2"></i> Portfolio</a>
+                    <a href="mailto:career@nakoleo.me" class="flex items-center px-6 py-3 bg-accent text-dark-bg rounded-md hover:opacity-90 shadow-lg shadow-accent/20 transition-all font-semibold"><i data-lucide="mail" class="w-4 h-4 mr-2"></i> ติดต่อเรา</a>
+                    <a href="Nakorn_Thacthachwarakul_Resume2025+Project.pdf" download="Nakorn_T_Resume.pdf" class="flex items-center px-6 py-3 bg-text-light text-dark-bg rounded-md hover:opacity-90 shadow-lg shadow-black/20 transition-all font-semibold"><i data-lucide="download" class="w-4 h-4 mr-2"></i> ดาวน์โหลด CV</a>
+                    <a href="https://portfolio.nakoleo.me" target="_blank" rel="noopener noreferrer" class="flex items-center px-6 py-3 border border-secondary text-text-light rounded-md hover:bg-secondary hover:text-dark-bg transition-all font-semibold"><i data-lucide="layout-template" class="w-4 h-4 mr-2"></i> ดูผลงาน</a>
                 </div>
                 <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce animate-on-scroll" style="transition-delay: 600ms;"><i data-lucide="arrow-down" class="w-6 h-6 text-accent mx-auto"></i></div>
             </div>
         </section>
 
-        <!-- The rest of the sections remain the same -->
+        <!-- ========== ABOUT SECTION ========== -->
         <section id="about" class="py-24 section-bg-alt">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-16 text-text-dark uppercase tracking-wider animate-on-scroll">About Me</h2>
+                <h2 class="text-3xl font-bold text-center mb-16 text-text-dark uppercase tracking-wider animate-on-scroll">เกี่ยวกับฉัน</h2>
                 <div class="grid md:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
-                    <div class="space-y-5 animate-on-scroll" style="transition-delay: 100ms;"><h3 class="text-xl font-bold text-text-dark mb-3">Professional Summary</h3><p class="text-secondary leading-relaxed text-sm">Strategic brand and creative marketing leader with 7+ years of experience transforming wellness brands through innovative positioning and compelling creative campaigns. Expert in C-level collaboration, brand identity development, and creative storytelling that drives measurable business growth.</p><p class="text-secondary leading-relaxed text-sm">Demonstrated success in co-creating brand strategies across 10+ wellness brands while consistently delivering breakthrough creative solutions that resonate with target audiences and exceed conversion targets.</p></div>
-                    <div class="space-y-4 animate-on-scroll" style="transition-delay: 200ms;"><h3 class="text-xl font-bold text-text-dark mb-4">Core Competencies</h3><div class="grid gap-4"><div class="flex items-start space-x-4"><i data-lucide="target" class="w-5 h-5 text-accent mt-1 flex-shrink-0"></i><div><h4 class="text-text-dark font-semibold text-base">Strategic Leadership</h4><p class="text-secondary text-sm">C-level collaboration & project management</p></div></div><div class="flex items-start space-x-4"><i data-lucide="palette" class="w-5 h-5 text-accent mt-1 flex-shrink-0"></i><div><h4 class="text-text-dark font-semibold text-base">Creative Excellence</h4><p class="text-secondary text-sm">Brand identity & visual storytelling</p></div></div><div class="flex items-start space-x-4"><i data-lucide="trending-up" class="w-5 h-5 text-accent mt-1 flex-shrink-0"></i><div><h4 class="text-text-dark font-semibold text-base">Marketing Science</h4><p class="text-secondary text-sm">Data analytics & ROI optimization</p></div></div></div></div>
+                    <div class="space-y-5 animate-on-scroll" style="transition-delay: 100ms;">
+                        <h3 class="text-xl font-bold text-text-dark mb-3">ประสบการณ์ที่โดดเด่น</h3>
+                        <div class="bg-gradient-to-r from-accent/10 to-transparent p-4 rounded-lg border-l-4 border-accent">
+                            <p class="text-text-dark font-semibold text-sm mb-2">🎯 ผลงานที่ประสบความสำเร็จ</p>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li class="text-secondary text-sm">สร้าง 297 ลีดคุณภาพในวันเปิดตัวแคมเปญ AI Digital Tailor-Made</li>
+                                <li class="text-secondary text-sm">บรรลุ 95% conversion rate จาก lead เป็นการจองบริการ</li>
+                                <li class="text-secondary text-sm">เพิ่มยอดขายรายเดือน 20% ผ่านกลยุทธ์ Influencer Marketing</li>
+                            </ul>
+                        </div>
+                        <p class="text-secondary leading-relaxed text-sm">นักกลยุทธ์ด้านการตลาดและการสร้างแบรนด์ที่มีประสบการณ์ 7+ ปี ในการเปลี่ยนแปลงแบรนด์ธุรกิจสุขภาพและความงามผ่านการวางตำแหน่งที่สร้างสรรค์และแคมเปญที่น่าสนใจ ผู้เชี่ยวชาญในการทำงานร่วมกับระดับผู้บริหาร การพัฒนาอัตลักษณ์แบรนด์ และการเล่าเรื่องเชิงสร้างสรรค์ที่ขับเคลื่อนการเติบโตทางธุรกิจที่วัดผลได้</p>
+                    </div>
+                    <div class="space-y-4 animate-on-scroll" style="transition-delay: 200ms;">
+                        <h3 class="text-xl font-bold text-text-dark mb-4">ความเชี่ยวชาญหลัก</h3>
+                        <div class="grid gap-4">
+                            <div class="flex items-start space-x-4"><i data-lucide="target" class="w-5 h-5 text-accent mt-1 flex-shrink-0"></i><div><h4 class="text-text-dark font-semibold text-base">Strategic Leadership</h4><p class="text-secondary text-sm">การทำงานร่วมกับผู้บริหารระดับสูง และการจัดการโครงการข้ามสายงาน</p></div></div>
+                            <div class="flex items-start space-x-4"><i data-lucide="palette" class="w-5 h-5 text-accent mt-1 flex-shrink-0"></i><div><h4 class="text-text-dark font-semibold text-base">Creative Excellence</h4><p class="text-secondary text-sm">การพัฒนาอัตลักษณ์แบรนด์ และการเล่าเรื่องเชิงภาพ</p></div></div>
+                            <div class="flex items-start space-x-4"><i data-lucide="trending-up" class="w-5 h-5 text-accent mt-1 flex-shrink-0"></i><div><h4 class="text-text-dark font-semibold text-base">Marketing Science</h4><p class="text-secondary text-sm">การวิเคราะห์ข้อมูล การทำ Automation และการเพิ่มประสิทธิภาพ ROI</p></div></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
+        <!-- ========== EXPERIENCE SECTION ========== -->
         <section id="experience" class="py-24">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-16 text-text-dark uppercase tracking-wider animate-on-scroll">Professional Experience</h2>
+                <h2 class="text-3xl font-bold text-center mb-16 text-text-dark uppercase tracking-wider animate-on-scroll">ประสบการณ์การทำงาน</h2>
                 <div class="max-w-3xl mx-auto">
-                    <div class="relative mb-12 animate-on-scroll"><div class="absolute left-4 top-4 -bottom-12 w-px bg-gray-200"></div><div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="briefcase" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="flex flex-wrap items-start justify-between mb-1"><div><h3 class="text-lg font-bold text-text-dark">Acting Marketing Director</h3><p class="text-accent font-semibold text-sm">Slim Up Center (The Marine Group)</p></div><p class="text-secondary text-xs mt-1">Oct 2022 – Dec 2024</p></div><ul class="space-y-2 mt-2 list-disc list-inside"><li class="text-secondary text-sm">Led AI Digital Tailor-Made campaign featured on Woody Channel, generating 297 qualified leads on launch day.</li><li class="text-secondary text-sm">Implemented centralized martech ecosystem across 19 branches with 95% lead-to-booking conversion.</li></ul></div></div></div>
-                    <div class="relative mb-12 animate-on-scroll"><div class="absolute left-4 top-4 -bottom-12 w-px bg-gray-200"></div><div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="briefcase" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="flex flex-wrap items-start justify-between mb-1"><div><h3 class="text-lg font-bold text-text-dark">Marketing Manager & Business Development</h3><p class="text-accent font-semibold text-sm">Harmony Life Center</p></div><p class="text-secondary text-xs mt-1">Oct 2023 – Jul 2024</p></div><ul class="space-y-2 mt-2 list-disc list-inside"><li class="text-secondary text-sm">Developed brand identity and go-to-market strategy for premium anti-aging clinic at CentralWorld.</li><li class="text-secondary text-sm">Achieved 20% increase in monthly revenue through influencer marketing campaigns.</li></ul></div></div></div>
-                    <div class="relative mb-12 animate-on-scroll"><div class="absolute left-4 top-4 -bottom-12 w-px bg-gray-200"></div><div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="briefcase" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="flex flex-wrap items-start justify-between mb-1"><div><h3 class="text-lg font-bold text-text-dark">Assistant Clinic Manager and Marketing</h3><p class="text-accent font-semibold text-sm">BWM Clinic</p></div><p class="text-secondary text-xs mt-1">Oct 2021 – Sep 2022</p></div><ul class="space-y-2 mt-2 list-disc list-inside"><li class="text-secondary text-sm">Managed the end-to-end licensing process for medical facilities, ensuring regulatory compliance.</li><li class="text-secondary text-sm">Enhanced the customer experience through tailored service models, improving customer retention.</li></ul></div></div></div>
-                    <div class="relative mb-12 animate-on-scroll"><div class="absolute left-4 top-4 -bottom-12 w-px bg-gray-200"></div><div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="briefcase" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="flex flex-wrap items-start justify-between mb-1"><div><h3 class="text-lg font-bold text-text-dark">Senior Designer & Marketing</h3><p class="text-accent font-semibold text-sm">BAAC Clinic</p></div><p class="text-secondary text-xs mt-1">Mar 2019 – Sep 2021</p></div><ul class="space-y-2 mt-2 list-disc list-inside"><li class="text-secondary text-sm">Led Health Check-Up campaigns with GoWabi, HD Mall, and MCOT Radio.</li><li class="text-secondary text-sm">Strengthened brand messaging and visual identity across multiple channels.</li></ul></div></div></div>
-                    <div class="relative mb-12 animate-on-scroll"><div class="absolute left-4 top-4 -bottom-12 w-px bg-gray-200"></div><div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="briefcase" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="flex flex-wrap items-start justify-between mb-1"><div><h3 class="text-lg font-bold text-text-dark">Customer Service Representative</h3><p class="text-accent font-semibold text-sm">AIS Flagship Store</p></div><p class="text-secondary text-xs mt-1">Sep 2018 – Feb 2019</p></div><ul class="space-y-2 mt-2 list-disc list-inside"><li class="text-secondary text-sm">Advised customers on mobile devices, service plans, and technical support, maintaining high satisfaction ratings.</li></ul></div></div></div>
-                    <div class="relative mb-0 animate-on-scroll"><div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="briefcase" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="flex flex-wrap items-start justify-between mb-1"><div><h3 class="text-lg font-bold text-text-dark">Junior Graphic Designer</h3><p class="text-accent font-semibold text-sm">Exotic Food PCL</p></div><p class="text-secondary text-xs mt-1">Sep 2017 – Aug 2018</p></div><ul class="space-y-2 mt-2 list-disc list-inside"><li class="text-secondary text-sm">Designed branding assets, advertising materials, and packaging, enhancing product appeal and market reach.</li></ul></div></div></div>
+                    <!-- Acting Marketing Director -->
+                    <div class="relative mb-12 animate-on-scroll"><div class="absolute left-4 top-4 -bottom-20 w-px bg-gray-200"></div><div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="crown" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="flex flex-wrap items-start justify-between mb-1"><div><h3 class="text-lg font-bold text-text-dark">Acting Marketing Director</h3><p class="text-accent font-semibold text-sm">Slim Up Center (The Marine Group)</p></div><p class="text-secondary text-xs mt-1">ต.ค. 2022 – ธ.ค. 2024</p></div><ul class="space-y-2 mt-2"><li class="text-secondary text-sm flex items-start"><span class="text-accent mr-2">•</span>นำแคมเปญ AI Digital Tailor-Made ขึ้นรายการ Woody Channel สร้าง 297 ลีดคุณภาพในวันเปิดตัว</li><li class="text-secondary text-sm flex items-start"><span class="text-accent mr-2">•</span>สร้างระบบ Martech ครบวงจรเชื่อมโยง 19 สาขา บรรลุ 95% conversion rate</li><li class="text-secondary text-sm flex items-start"><span class="text-accent mr-2">•</span>พัฒนาโครงการ Diamond Customers สำหรับลูกค้า VIP ด้วย 1:1 personalized service</li></ul></div></div></div>
+                    <!-- Marketing Manager -->
+                    <div class="relative mb-12 animate-on-scroll"><div class="absolute left-4 top-4 -bottom-16 w-px bg-gray-200"></div><div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="briefcase" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="flex flex-wrap items-start justify-between mb-1"><div><h3 class="text-lg font-bold text-text-dark">Marketing Manager & Business Development</h3><p class="text-accent font-semibold text-sm">Harmony Life Center</p></div><p class="text-secondary text-xs mt-1">ต.ค. 2023 – ก.ค. 2024</p></div><ul class="space-y-2 mt-2"><li class="text-secondary text-sm flex items-start"><span class="text-accent mr-2">•</span>พัฒนาอัตลักษณ์แบรนด์และกลยุทธ์ Go-to-Market สำหรับคลินิกพรีเมียม</li><li class="text-secondary text-sm flex items-start"><span class="text-accent mr-2">•</span>เพิ่มยอดขายรายเดือน 20% ผ่านแคมเปญ Influencer Marketing</li><li class="text-secondary text-sm flex items-start"><span class="text-accent mr-2">•</span>ดึงลูกค้าเก่ากลับมาใช้บริการ 30+ คนต่อวันต่อสาขา</li></ul></div></div></div>
+                    <!-- Other positions in a single card -->
+                    <div class="relative mb-0 animate-on-scroll"><div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="star" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="text-left p-4 bg-gray-50 rounded-lg border border-gray-200"><p class="text-text-dark font-semibold mb-2">ประสบการณ์เพิ่มเติม (2017 - 2022)</p><p class="text-secondary text-sm">Assistant Clinic Manager & Marketing, Senior Designer & Marketing, Customer Service Representative, และ Junior Graphic Designer ที่ BAAC Clinic, BWM Clinic, AIS, และ Exotic Food PCL</p></div></div></div></div>
                 </div>
             </div>
         </section>
 
+        <!-- ========== PROJECTS SECTION ========== -->
         <section id="projects" class="py-24 section-bg-alt">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-12 text-text-dark uppercase tracking-wider animate-on-scroll">Key Projects</h2>
+                <h2 class="text-3xl font-bold text-center mb-12 text-text-dark uppercase tracking-wider animate-on-scroll">โปรเจกต์สำคัญ</h2>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="animate-on-scroll bg-bg rounded-lg p-5 border border-transparent hover:border-accent/50 transition-colors duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl hover:shadow-accent/10"><div class="flex items-center text-accent mb-3"><i data-lucide="lightbulb" class="w-5 h-5 mr-3"></i><span class="text-xs uppercase tracking-widest font-semibold">Brand Portfolio</span></div><h3 class="text-base font-bold text-text-dark mb-2">The Marine Group Compendium</h3><p class="text-secondary text-sm leading-relaxed">Strategic document compiling identities and visions of 13 brands to enhance market credibility and investor confidence.</p></div>
-                    <div class="animate-on-scroll bg-bg rounded-lg p-5 border border-transparent hover:border-accent/50 transition-colors duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl hover:shadow-accent/10" style="transition-delay: 100ms;"><div class="flex items-center text-accent mb-3"><i data-lucide="gem" class="w-5 h-5 mr-3"></i><span class="text-xs uppercase tracking-widest font-semibold">VVIP CRM</span></div><h3 class="text-base font-bold text-text-dark mb-2">Project Diamond Customer</h3><p class="text-secondary text-sm leading-relaxed">Flagship CRM for high-value customers, leveraging data analysis for personalized 1:1 marketing and service packages.</p></div>
-                    <div class="animate-on-scroll bg-bg rounded-lg p-5 border border-transparent hover:border-accent/50 transition-colors duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl hover:shadow-accent/10" style="transition-delay: 200ms;"><div class="flex items-center text-accent mb-3"><i data-lucide="refresh-cw" class="w-5 h-5 mr-3"></i><span class="text-xs uppercase tracking-widest font-semibold">Digital Transformation</span></div><h3 class="text-base font-bold text-text-dark mb-2">Nutrition Record Data</h3><p class="text-secondary text-sm leading-relaxed">Transformed paper health records into a centralized database for precise, data-driven marketing strategies.</p></div>
-                    <div class="animate-on-scroll bg-bg rounded-lg p-5 border border-transparent hover:border-accent/50 transition-colors duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl hover:shadow-accent/10" style="transition-delay: 300ms;"><div class="flex items-center text-accent mb-3"><i data-lucide="bot" class="w-5 h-5 mr-3"></i><span class="text-xs uppercase tracking-widest font-semibold">AI & Automation</span></div><h3 class="text-base font-bold text-text-dark mb-2">Social Insight & AI FAQ</h3><p class="text-secondary text-sm leading-relaxed">Aggregated social media data with AI processing to create a standardized FAQ manual and future-proof chatbot integration.</p></div>
-                    <div class="animate-on-scroll bg-bg rounded-lg p-5 border border-transparent hover:border-accent/50 transition-colors duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl hover:shadow-accent/10" style="transition-delay: 400ms;"><div class="flex items-center text-accent mb-3"><i data-lucide="cpu" class="w-5 h-5 mr-3"></i><span class="text-xs uppercase tracking-widest font-semibold">Tech Integration</span></div><h3 class="text-base font-bold text-text-dark mb-2">LINE Customer CRM</h3><p class="text-secondary text-sm leading-relaxed">Centralized CRM system on LINE for automated, targeted campaigns and cross-branch performance insights.</p></div>
-                    <div class="animate-on-scroll bg-bg rounded-lg p-5 border border-transparent hover:border-accent/50 transition-colors duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl hover:shadow-accent/10" style="transition-delay: 500ms;"><div class="flex items-center text-accent mb-3"><i data-lucide="rocket" class="w-5 h-5 mr-3"></i><span class="text-xs uppercase tracking-widest font-semibold">Growth Strategy</span></div><h3 class="text-base font-bold text-text-dark mb-2">Affiliate Marketing Expansion</h3><p class="text-secondary text-sm leading-relaxed">Expanded distribution channels via affiliate networks with robust tracking and transparent commission models.</p></div>
+                    <div class="animate-on-scroll project-card bg-bg rounded-lg p-5 border border-transparent"><div class="flex items-center text-accent mb-3"><i data-lucide="lightbulb" class="w-5 h-5 mr-3"></i><span class="text-xs uppercase tracking-widest font-semibold">Brand Portfolio</span></div><h3 class="text-base font-bold text-text-dark mb-2">The Marine Group Compendium</h3><p class="text-secondary text-sm leading-relaxed">รวบรวมอัตลักษณ์และวิสัยทัศน์ของ 13 แบรนด์เพื่อเพิ่มความน่าเชื่อถือในตลาด</p></div>
+                    <div class="animate-on-scroll project-card bg-bg rounded-lg p-5 border border-transparent" style="transition-delay: 100ms;"><div class="flex items-center text-accent mb-3"><i data-lucide="gem" class="w-5 h-5 mr-3"></i><span class="text-xs uppercase tracking-widest font-semibold">VVIP CRM</span></div><h3 class="text-base font-bold text-text-dark mb-2">Project Diamond Customer</h3><p class="text-secondary text-sm leading-relaxed">CRM สำหรับลูกค้าระดับสูง โดยใช้การวิเคราะห์ข้อมูลเพื่อสร้างการตลาดแบบ 1:1</p></div>
+                    <div class="animate-on-scroll project-card bg-bg rounded-lg p-5 border border-transparent" style="transition-delay: 200ms;"><div class="flex items-center text-accent mb-3"><i data-lucide="refresh-cw" class="w-5 h-5 mr-3"></i><span class="text-xs uppercase tracking-widest font-semibold">Digital Transformation</span></div><h3 class="text-base font-bold text-text-dark mb-2">Nutrition Record Data</h3><p class="text-secondary text-sm leading-relaxed">เปลี่ยนข้อมูลสุขภาพจากกระดาษเป็นดิจิทัลเพื่อกลยุทธ์การตลาดที่แม่นยำ</p></div>
                 </div>
             </div>
         </section>
 
+        <!-- ========== SKILLS SECTION ========== -->
         <section id="skills" class="py-24">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-16 text-text-dark uppercase tracking-wider animate-on-scroll">Skills & Expertise</h2>
+                <h2 class="text-3xl font-bold text-center mb-16 text-text-dark uppercase tracking-wider animate-on-scroll">ทักษะและความเชี่ยวชาญ</h2>
                 <div class="max-w-5xl mx-auto">
                     <div class="grid md:grid-cols-2 gap-12 mb-10">
                         <div class="animate-on-scroll"><h3 class="text-xl font-bold text-text-dark mb-6 flex items-center"><i data-lucide="code" class="w-5 h-5 mr-3 text-accent"></i>Technical Skills</h3><div class="space-y-5"><div><div class="flex justify-between items-center mb-1"><span class="text-text-dark font-medium text-sm">Google Analytics & Looker Studio</span><span class="text-accent text-xs font-semibold">90%</span></div><div class="w-full bg-gray-200 rounded-full h-1.5"><div class="skill-bar-fill h-1.5 rounded-full" style="width: 90%;"></div></div></div><div><div class="flex justify-between items-center mb-1"><span class="text-text-dark font-medium text-sm">Adobe Creative Cloud</span><span class="text-accent text-xs font-semibold">95%</span></div><div class="w-full bg-gray-200 rounded-full h-1.5"><div class="skill-bar-fill h-1.5 rounded-full" style="width: 95%;"></div></div></div><div><div class="flex justify-between items-center mb-1"><span class="text-text-dark font-medium text-sm">AI Tools (ChatGPT, Claude)</span><span class="text-accent text-xs font-semibold">85%</span></div><div class="w-full bg-gray-200 rounded-full h-1.5"><div class="skill-bar-fill h-1.5 rounded-full" style="width: 85%;"></div></div></div></div></div>
@@ -211,19 +313,20 @@
             </div>
         </section>
 
+        <!-- ========== EDUCATION SECTION ========== -->
         <section id="education" class="py-24 section-bg-alt">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-12 text-text-dark uppercase tracking-wider animate-on-scroll">Education & Recognition</h2>
+                <h2 class="text-3xl font-bold text-center mb-12 text-text-dark uppercase tracking-wider animate-on-scroll">การศึกษา</h2>
                 <div class="max-w-4xl mx-auto">
                     <div class="bg-bg rounded-lg p-6 border animate-on-scroll">
                         <div class="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6">
                             <div class="w-14 h-14 bg-accent rounded-full flex items-center justify-center flex-shrink-0"><i data-lucide="graduation-cap" class="w-7 h-7 text-bg"></i></div>
                             <div class="flex-grow">
-                                <h3 class="text-lg font-bold text-text-dark">Bachelor of Fine Arts in Computer Graphics</h3>
-                                <p class="text-accent font-semibold text-base mb-3">Dhurakij Pundit University (DPU)</p>
+                                <h3 class="text-lg font-bold text-text-dark">ศิลปศาสตรบัณฑิต สาขาวิชาคอมพิวเตอร์กราฟิก</h3>
+                                <p class="text-accent font-semibold text-base mb-3">มหาวิทยาลัยธุรกิจบัณฑิตย์ (DPU)</p>
                                 <div class="grid md:grid-cols-2 gap-4">
-                                    <div class="flex items-center space-x-3"><i data-lucide="trophy" class="w-5 h-5 text-accent"></i><div><p class="text-text-dark font-semibold text-sm">First Class Honors</p><p class="text-secondary text-xs">GPA: 3.73</p></div></div>
-                                    <div class="flex items-center space-x-3"><i data-lucide="award" class="w-5 h-5 text-accent"></i><div><p class="text-text-dark font-semibold text-sm">Noparat Gold Medal</p><p class="text-secondary text-xs">Academic Excellence</p></div></div>
+                                    <div class="flex items-center space-x-3"><i data-lucide="trophy" class="w-5 h-5 text-accent"></i><div><p class="text-text-dark font-semibold text-sm">เกียรตินิยมอันดับหนึ่ง</p><p class="text-secondary text-xs">GPA: 3.73</p></div></div>
+                                    <div class="flex items-center space-x-3"><i data-lucide="award" class="w-5 h-5 text-accent"></i><div><p class="text-text-dark font-semibold text-sm">เหรียญทองนพรัตน์</p><p class="text-secondary text-xs">ผลการเรียนยอดเยี่ยม</p></div></div>
                                 </div>
                             </div>
                         </div>
@@ -233,9 +336,10 @@
         </section>
     </main>
 
+    <!-- ========== FOOTER ========== -->
     <footer class="py-12 bg-white">
         <div class="container mx-auto px-6 text-center">
-            <div class="mb-5"><h3 class="text-xl font-bold text-text-dark mb-1">Let's Connect</h3><p class="text-secondary text-sm">Ready to transform your brand with innovative marketing strategies?</p></div>
+            <div class="mb-5"><h3 class="text-xl font-bold text-text-dark mb-1">ติดต่อ</h3><p class="text-secondary text-sm">พร้อมที่จะเปลี่ยนแปลงแบรนด์ของคุณด้วยกลยุทธ์การตลาดที่สร้างสรรค์แล้วหรือยัง?</p></div>
             <div class="flex justify-center space-x-4 mb-6">
                 <a href="mailto:career@nakoleo.me" class="w-10 h-10 bg-text-dark text-bg rounded-full flex items-center justify-center hover:bg-accent transition-colors"><i data-lucide="mail" class="w-5 h-5"></i></a>
                 <a href="https://linkedin.com/in/nakom-leo" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-text-dark text-bg rounded-full flex items-center justify-center hover:bg-accent transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
@@ -263,6 +367,12 @@
     <script>
         lucide.createIcons();
         document.addEventListener('DOMContentLoaded', () => {
+            const loadingScreen = document.getElementById('loadingScreen');
+            // FIX: Hide loading screen as soon as the basic document structure is ready.
+            if(loadingScreen) {
+                loadingScreen.classList.add('hidden');
+            }
+
             const header = document.getElementById('header');
             const logo = document.getElementById('logo');
             const desktopNavLinks = document.querySelectorAll('#desktop-nav .nav-link');
@@ -271,21 +381,16 @@
 
             const handleScroll = () => {
                 const heroSectionHeight = document.getElementById('hero').offsetHeight;
-                if (window.scrollY > heroSectionHeight - 50) {
-                    header.style.backgroundColor = 'rgba(245, 247, 241, 0.8)';
-                    header.style.boxShadow = '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)';
-                    logo.style.color = 'var(--color-accent)';
-                    desktopNavLinks.forEach(link => link.style.color = 'var(--color-text-dark)');
-                    mobileMenuButton.style.color = 'var(--color-text-dark)';
-                    mobileNav.style.color = 'var(--color-text-dark)';
-                } else {
-                    header.style.backgroundColor = 'transparent';
-                    header.style.boxShadow = 'none';
-                    logo.style.color = 'var(--color-accent)';
-                    desktopNavLinks.forEach(link => link.style.color = 'var(--color-text-light)');
-                    mobileMenuButton.style.color = 'var(--color-text-light)';
-                    mobileNav.style.color = 'var(--color-text-light)';
-                }
+                const isScrolledPastHero = window.scrollY > heroSectionHeight - 50;
+                
+                header.style.backgroundColor = isScrolledPastHero ? 'rgba(245, 247, 241, 0.8)' : 'transparent';
+                header.style.boxShadow = isScrolledPastHero ? '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)' : 'none';
+                logo.style.color = 'var(--color-accent)';
+                
+                const navColor = isScrolledPastHero ? 'var(--color-text-dark)' : 'var(--color-text-light)';
+                desktopNavLinks.forEach(link => link.style.color = navColor);
+                mobileMenuButton.style.color = navColor;
+                mobileNav.style.color = navColor;
             };
             window.addEventListener('scroll', handleScroll);
             handleScroll();
@@ -328,4 +433,4 @@
         });
     </script>
 </body>
-</ht
+</html>
