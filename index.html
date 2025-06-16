@@ -10,7 +10,7 @@
     <meta name="keywords" content="Marketing Director, Brand Strategy, Digital Marketing, Healthcare Marketing, Business Development, Thailand">
     <meta name="author" content="Nakorn Thanthachwarakul">
 
-    <!-- Open Graph Meta Tags -->
+    <!-- Open Graph Meta Tags for Social Sharing -->
     <meta property="og:title" content="Nakorn Thanthachwarakul - Marketing Director & Brand Strategist">
     <meta property="og:description" content="Strategic brand and creative marketing leader with 7+ years of experience transforming wellness brands">
     <meta property="og:image" content="https://i.postimg.cc/T35jzBT0/Nakorn-Ai-02.png">
@@ -34,7 +34,8 @@
             --color-text-light: #F5F7F1;
             --color-text-dark: #172A44;
             --color-accent: #D4B17A; /* Champagne Gold */
-            --color-secondary: #8892b0; /* Slate-400 equivalent for secondary text */
+            --color-secondary: #64748b; /* Slate-500 for secondary text */
+            --color-border: rgba(23, 42, 68, 0.1);
         }
         
         * {
@@ -53,7 +54,6 @@
             padding-bottom: 100px; /* Add padding for the contact bar */
         }
         
-        /* Light Theme */
         .text-accent { color: var(--color-accent); }
         .bg-accent { background-color: var(--color-accent); }
         .border-accent { border-color: var(--color-accent); }
@@ -65,131 +65,70 @@
         .skill-bar-fill { background-color: var(--color-accent); }
         .section-bg-alt { background-color: #FFFFFF; }
 
-        /* Dark Theme Specific (for Hero) */
         .dark-theme {
             background-color: var(--color-dark-bg);
             color: var(--color-text-light);
         }
         .dark-theme .text-secondary {
-            color: var(--color-secondary);
+            color: #8892b0;
         }
         .dark-theme .text-heading {
              color: var(--color-text-light);
         }
 
-        /* Loading Animation */
         .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--color-dark-bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             z-index: 9999;
             transition: opacity 0.5s ease, visibility 0.5s ease;
         }
-        
-        .loading-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-        
+        .loading-screen.hidden { opacity: 0; visibility: hidden; }
         .loading-spinner {
-            width: 50px;
-            height: 50px;
+            width: 50px; height: 50px;
             border: 3px solid var(--color-secondary);
             border-top: 3px solid var(--color-accent);
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* Animation Styles */
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-        .animate-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
 
-        /* Bottom Contact Bar Styles */
         .contact-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: rgba(23, 42, 68, 0.95); /* Deep Navy with opacity */
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background-color: rgba(23, 42, 68, 0.95);
             backdrop-filter: blur(10px);
-            padding: 1rem;
-            z-index: 100;
+            padding: 1rem; z-index: 100;
             border-top: 1px solid rgba(212, 177, 122, 0.2);
             box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
         }
         .contact-bar-inner {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            max-width: 400px;
-            margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 1rem; max-width: 400px; margin: 0 auto;
         }
         .contact-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 0.875rem;
+            display: flex; align-items: center; justify-content: center;
+            padding: 0.75rem 1rem; border-radius: 0.5rem; font-weight: 600;
+            text-decoration: none; transition: all 0.3s ease; font-size: 0.875rem;
         }
         .contact-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        .call-button {
-            background-color: var(--color-accent);
-            color: var(--color-dark-bg);
-        }
-        .line-button {
-            background-color: #06C755; /* Official LINE Green */
-            color: white;
-        }
+        .call-button { background-color: var(--color-accent); color: var(--color-dark-bg); }
+        .line-button { background-color: #06C755; color: white; }
 
-        /* Improved hover effects */
-        .project-card {
-            transition: all 0.3s ease;
-        }
         .project-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px -10px rgba(23, 42, 68, 0.15);
         }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--color-bg);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--color-accent);
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #b8965f;
-        }
-
+        
     </style>
 </head>
 <body class="min-h-screen">
@@ -198,13 +137,11 @@
         <div class="loading-spinner"></div>
     </div>
 
-    <!-- ========== HEADER ========== -->
+    <!-- HEADER -->
     <header class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300" id="header">
         <nav class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
-                <a href="#hero" class="text-lg font-bold uppercase tracking-wider transition-colors duration-300" id="logo">
-                    NAKORN T.
-                </a>
+                <a href="#hero" class="text-lg font-bold uppercase tracking-wider transition-colors duration-300" id="logo">NAKORN T.</a>
                 <div id="desktop-nav" class="hidden md:flex space-x-4">
                     <a href="#about" class="nav-link px-3 py-1 transition-colors duration-300">About</a>
                     <a href="#experience" class="nav-link px-3 py-1 transition-colors duration-300">Experience</a>
@@ -225,9 +162,9 @@
     </header>
 
     <main>
-        <!-- ========== HERO SECTION ========== -->
+        <!-- HERO SECTION -->
         <section id="hero" class="dark-theme min-h-screen flex items-center justify-center relative pt-20">
-             <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
             <div class="container mx-auto px-6 text-center relative z-10">
                 <img src="https://i.postimg.cc/T35jzBT0/Nakorn-Ai-02.png" alt="Nakorn Thanthachwarakul" class="w-32 h-32 mx-auto mb-6 rounded-full object-cover border-4 border-accent shadow-lg animate-on-scroll">
                 <h1 class="text-4xl md:text-6xl font-bold mb-2 uppercase text-heading animate-on-scroll" style="transition-delay: 100ms;">NAKORN THANTACHAWARAKUL</h1>
@@ -235,59 +172,38 @@
                 <p class="text-lg md:text-xl text-heading mb-6 max-w-2xl mx-auto animate-on-scroll" style="transition-delay: 300ms;">Marketing Director & Brand Innovation Strategist</p>
                 <p class="text-base text-secondary max-w-3xl mx-auto mb-10 leading-relaxed animate-on-scroll" style="transition-delay: 400ms;">นักกลยุทธ์การตลาดและการสร้างแบรนด์ที่มีประสบการณ์ 7+ ปี ในการเปลี่ยนแปลงแบรนด์ธุรกิจสุขภาพและความงามผ่านกลยุทธ์การตลาดดิจิทัลที่สร้างสรรค์และผลลัพธ์ที่วัดผลได้</p>
                 <div class="flex flex-wrap justify-center gap-4 mb-12 animate-on-scroll" style="transition-delay: 500ms;">
-                    <a href="mailto:career@nakoleo.me" class="flex items-center px-6 py-3 bg-accent text-dark-bg rounded-md hover:opacity-90 shadow-lg shadow-accent/20 transition-all font-semibold"><i data-lucide="mail" class="w-4 h-4 mr-2"></i> ติดต่อเรา</a>
+                    <a href="mailto:career@nakoleo.me" class="flex items-center px-6 py-3 bg-accent text-dark-bg rounded-md hover:opacity-90 shadow-lg shadow-accent/20 transition-all font-semibold"><i data-lucide="mail" class="w-4 h-4 mr-2"></i> ติดต่อ</a>
                     <a href="Nakorn_Thacthachwarakul_Resume2025+Project.pdf" download="Nakorn_T_Resume.pdf" class="flex items-center px-6 py-3 bg-text-light text-dark-bg rounded-md hover:opacity-90 shadow-lg shadow-black/20 transition-all font-semibold"><i data-lucide="download" class="w-4 h-4 mr-2"></i> ดาวน์โหลด CV</a>
-                    <a href="https://portfolio.nakoleo.me" target="_blank" rel="noopener noreferrer" class="flex items-center px-6 py-3 border border-secondary text-text-light rounded-md hover:bg-secondary hover:text-dark-bg transition-all font-semibold"><i data-lucide="layout-template" class="w-4 h-4 mr-2"></i> ดูผลงาน</a>
+                    <a href="Nakorn_Thacthachwarakul_Resume2025+Project.pdf" download="Nakorn_T_Portfolio.pdf" class="flex items-center px-6 py-3 border border-secondary text-text-light rounded-md hover:bg-secondary hover:text-dark-bg transition-all font-semibold"><i data-lucide="layout-template" class="w-4 h-4 mr-2"></i> ดูผลงาน</a>
                 </div>
                 <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce animate-on-scroll" style="transition-delay: 600ms;"><i data-lucide="arrow-down" class="w-6 h-6 text-accent mx-auto"></i></div>
             </div>
         </section>
 
-        <!-- ========== ABOUT SECTION ========== -->
+        <!-- ABOUT SECTION -->
         <section id="about" class="py-24 section-bg-alt">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl font-bold text-center mb-16 text-text-dark uppercase tracking-wider animate-on-scroll">เกี่ยวกับฉัน</h2>
                 <div class="grid md:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
-                    <div class="space-y-5 animate-on-scroll" style="transition-delay: 100ms;">
-                        <h3 class="text-xl font-bold text-text-dark mb-3">ประสบการณ์ที่โดดเด่น</h3>
-                        <div class="bg-gradient-to-r from-accent/10 to-transparent p-4 rounded-lg border-l-4 border-accent">
-                            <p class="text-text-dark font-semibold text-sm mb-2">🎯 ผลงานที่ประสบความสำเร็จ</p>
-                            <ul class="list-disc list-inside space-y-1">
-                                <li class="text-secondary text-sm">สร้าง 297 ลีดคุณภาพในวันเปิดตัวแคมเปญ AI Digital Tailor-Made</li>
-                                <li class="text-secondary text-sm">บรรลุ 95% conversion rate จาก lead เป็นการจองบริการ</li>
-                                <li class="text-secondary text-sm">เพิ่มยอดขายรายเดือน 20% ผ่านกลยุทธ์ Influencer Marketing</li>
-                            </ul>
-                        </div>
-                        <p class="text-secondary leading-relaxed text-sm">นักกลยุทธ์ด้านการตลาดและการสร้างแบรนด์ที่มีประสบการณ์ 7+ ปี ในการเปลี่ยนแปลงแบรนด์ธุรกิจสุขภาพและความงามผ่านการวางตำแหน่งที่สร้างสรรค์และแคมเปญที่น่าสนใจ ผู้เชี่ยวชาญในการทำงานร่วมกับระดับผู้บริหาร การพัฒนาอัตลักษณ์แบรนด์ และการเล่าเรื่องเชิงสร้างสรรค์ที่ขับเคลื่อนการเติบโตทางธุรกิจที่วัดผลได้</p>
-                    </div>
-                    <div class="space-y-4 animate-on-scroll" style="transition-delay: 200ms;">
-                        <h3 class="text-xl font-bold text-text-dark mb-4">ความเชี่ยวชาญหลัก</h3>
-                        <div class="grid gap-4">
-                            <div class="flex items-start space-x-4"><i data-lucide="target" class="w-5 h-5 text-accent mt-1 flex-shrink-0"></i><div><h4 class="text-text-dark font-semibold text-base">Strategic Leadership</h4><p class="text-secondary text-sm">การทำงานร่วมกับผู้บริหารระดับสูง และการจัดการโครงการข้ามสายงาน</p></div></div>
-                            <div class="flex items-start space-x-4"><i data-lucide="palette" class="w-5 h-5 text-accent mt-1 flex-shrink-0"></i><div><h4 class="text-text-dark font-semibold text-base">Creative Excellence</h4><p class="text-secondary text-sm">การพัฒนาอัตลักษณ์แบรนด์ และการเล่าเรื่องเชิงภาพ</p></div></div>
-                            <div class="flex items-start space-x-4"><i data-lucide="trending-up" class="w-5 h-5 text-accent mt-1 flex-shrink-0"></i><div><h4 class="text-text-dark font-semibold text-base">Marketing Science</h4><p class="text-secondary text-sm">การวิเคราะห์ข้อมูล การทำ Automation และการเพิ่มประสิทธิภาพ ROI</p></div></div>
-                        </div>
-                    </div>
+                    <div class="space-y-5 animate-on-scroll" style="transition-delay: 100ms;"><h3 class="text-xl font-bold text-text-dark mb-3">ประสบการณ์ที่โดดเด่น</h3><div class="bg-gradient-to-r from-accent/10 to-transparent p-4 rounded-lg border-l-4 border-accent"><p class="text-text-dark font-semibold text-sm mb-2">🎯 ผลงานที่ประสบความสำเร็จ</p><ul class="list-disc list-inside space-y-1"><li class="text-secondary text-sm">สร้าง 297 ลีดคุณภาพในวันเปิดตัวแคมเปญ AI Digital Tailor-Made</li><li class="text-secondary text-sm">บรรลุ 95% conversion rate จาก lead เป็นการจองบริการ</li><li class="text-secondary text-sm">เพิ่มยอดขายรายเดือน 20% ผ่านกลยุทธ์ Influencer Marketing</li></ul></div><p class="text-secondary leading-relaxed text-sm">นักกลยุทธ์ด้านการตลาดและการสร้างแบรนด์ที่มีประสบการณ์ 7+ ปี ในการเปลี่ยนแปลงแบรนด์ธุรกิจสุขภาพและความงามผ่านการวางตำแหน่งที่สร้างสรรค์และแคมเปญที่น่าสนใจ ผู้เชี่ยวชาญในการทำงานร่วมกับระดับผู้บริหาร การพัฒนาอัตลักษณ์แบรนด์ และการเล่าเรื่องเชิงสร้างสรรค์ที่ขับเคลื่อนการเติบโตทางธุรกิจที่วัดผลได้</p></div>
+                    <div class="space-y-4 animate-on-scroll" style="transition-delay: 200ms;"><h3 class="text-xl font-bold text-text-dark mb-4">ความเชี่ยวชาญหลัก</h3><div class="grid gap-4"><div class="flex items-start space-x-4"><i data-lucide="target" class="w-5 h-5 text-accent mt-1 flex-shrink-0"></i><div><h4 class="text-text-dark font-semibold text-base">Strategic Leadership</h4><p class="text-secondary text-sm">การทำงานร่วมกับผู้บริหารระดับสูง และการจัดการโครงการข้ามสายงาน</p></div></div><div class="flex items-start space-x-4"><i data-lucide="palette" class="w-5 h-5 text-accent mt-1 flex-shrink-0"></i><div><h4 class="text-text-dark font-semibold text-base">Creative Excellence</h4><p class="text-secondary text-sm">การพัฒนาอัตลักษณ์แบรนด์ และการเล่าเรื่องเชิงภาพ</p></div></div><div class="flex items-start space-x-4"><i data-lucide="trending-up" class="w-5 h-5 text-accent mt-1 flex-shrink-0"></i><div><h4 class="text-text-dark font-semibold text-base">Marketing Science</h4><p class="text-secondary text-sm">การวิเคราะห์ข้อมูล การทำ Automation และการเพิ่มประสิทธิภาพ ROI</p></div></div></div></div>
                 </div>
             </div>
         </section>
 
-        <!-- ========== EXPERIENCE SECTION ========== -->
+        <!-- EXPERIENCE SECTION -->
         <section id="experience" class="py-24">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl font-bold text-center mb-16 text-text-dark uppercase tracking-wider animate-on-scroll">ประสบการณ์การทำงาน</h2>
                 <div class="max-w-3xl mx-auto">
-                    <!-- Acting Marketing Director -->
                     <div class="relative mb-12 animate-on-scroll"><div class="absolute left-4 top-4 -bottom-20 w-px bg-gray-200"></div><div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="crown" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="flex flex-wrap items-start justify-between mb-1"><div><h3 class="text-lg font-bold text-text-dark">Acting Marketing Director</h3><p class="text-accent font-semibold text-sm">Slim Up Center (The Marine Group)</p></div><p class="text-secondary text-xs mt-1">ต.ค. 2022 – ธ.ค. 2024</p></div><ul class="space-y-2 mt-2"><li class="text-secondary text-sm flex items-start"><span class="text-accent mr-2">•</span>นำแคมเปญ AI Digital Tailor-Made ขึ้นรายการ Woody Channel สร้าง 297 ลีดคุณภาพในวันเปิดตัว</li><li class="text-secondary text-sm flex items-start"><span class="text-accent mr-2">•</span>สร้างระบบ Martech ครบวงจรเชื่อมโยง 19 สาขา บรรลุ 95% conversion rate</li><li class="text-secondary text-sm flex items-start"><span class="text-accent mr-2">•</span>พัฒนาโครงการ Diamond Customers สำหรับลูกค้า VIP ด้วย 1:1 personalized service</li></ul></div></div></div>
-                    <!-- Marketing Manager -->
                     <div class="relative mb-12 animate-on-scroll"><div class="absolute left-4 top-4 -bottom-16 w-px bg-gray-200"></div><div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="briefcase" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="flex flex-wrap items-start justify-between mb-1"><div><h3 class="text-lg font-bold text-text-dark">Marketing Manager & Business Development</h3><p class="text-accent font-semibold text-sm">Harmony Life Center</p></div><p class="text-secondary text-xs mt-1">ต.ค. 2023 – ก.ค. 2024</p></div><ul class="space-y-2 mt-2"><li class="text-secondary text-sm flex items-start"><span class="text-accent mr-2">•</span>พัฒนาอัตลักษณ์แบรนด์และกลยุทธ์ Go-to-Market สำหรับคลินิกพรีเมียม</li><li class="text-secondary text-sm flex items-start"><span class="text-accent mr-2">•</span>เพิ่มยอดขายรายเดือน 20% ผ่านแคมเปญ Influencer Marketing</li><li class="text-secondary text-sm flex items-start"><span class="text-accent mr-2">•</span>ดึงลูกค้าเก่ากลับมาใช้บริการ 30+ คนต่อวันต่อสาขา</li></ul></div></div></div>
-                    <!-- Other positions in a single card -->
                     <div class="relative mb-0 animate-on-scroll"><div class="flex items-start space-x-5 relative"><div class="flex-shrink-0"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center ring-8 ring-bg"><i data-lucide="star" class="w-4 h-4 text-bg"></i></div></div><div class="flex-grow"><div class="text-left p-4 bg-gray-50 rounded-lg border border-gray-200"><p class="text-text-dark font-semibold mb-2">ประสบการณ์เพิ่มเติม (2017 - 2022)</p><p class="text-secondary text-sm">Assistant Clinic Manager & Marketing, Senior Designer & Marketing, Customer Service Representative, และ Junior Graphic Designer ที่ BAAC Clinic, BWM Clinic, AIS, และ Exotic Food PCL</p></div></div></div></div>
                 </div>
             </div>
         </section>
 
-        <!-- ========== PROJECTS SECTION ========== -->
+        <!-- PROJECTS SECTION -->
         <section id="projects" class="py-24 section-bg-alt">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl font-bold text-center mb-12 text-text-dark uppercase tracking-wider animate-on-scroll">โปรเจกต์สำคัญ</h2>
@@ -299,7 +215,7 @@
             </div>
         </section>
 
-        <!-- ========== SKILLS SECTION ========== -->
+        <!-- SKILLS SECTION -->
         <section id="skills" class="py-24">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl font-bold text-center mb-16 text-text-dark uppercase tracking-wider animate-on-scroll">ทักษะและความเชี่ยวชาญ</h2>
@@ -313,7 +229,7 @@
             </div>
         </section>
 
-        <!-- ========== EDUCATION SECTION ========== -->
+        <!-- EDUCATION SECTION -->
         <section id="education" class="py-24 section-bg-alt">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl font-bold text-center mb-12 text-text-dark uppercase tracking-wider animate-on-scroll">การศึกษา</h2>
@@ -336,7 +252,7 @@
         </section>
     </main>
 
-    <!-- ========== FOOTER ========== -->
+    <!-- FOOTER -->
     <footer class="py-12 bg-white">
         <div class="container mx-auto px-6 text-center">
             <div class="mb-5"><h3 class="text-xl font-bold text-text-dark mb-1">ติดต่อ</h3><p class="text-secondary text-sm">พร้อมที่จะเปลี่ยนแปลงแบรนด์ของคุณด้วยกลยุทธ์การตลาดที่สร้างสรรค์แล้วหรือยัง?</p></div>
@@ -352,26 +268,16 @@
     <!-- Bottom Contact Bar -->
     <div class="contact-bar">
         <div class="contact-bar-inner">
-            <a href="tel:+66926544915" class="contact-button call-button">
-                <i data-lucide="phone" class="w-4 h-4 mr-2"></i>
-                <span>โทร</span>
-            </a>
-            <a href="https://line.me/ti/p/aNKFFRAPJu" target="_blank" class="contact-button line-button">
-                <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M16.4,18.88a7.6,7.6,0,0,1-3.32.76,7.84,7.84,0,0,1-8-7.55,8,8,0,0,1,8.12-8.31,7.94,7.94,0,0,1,3.2.73ZM12.06,2.5A9.55,9.55,0,0,0,3.5,12.24a9.7,9.7,0,0,0,9.47,9.47,9.55,9.55,0,0,0,9.5-9.82A9.55,9.55,0,0,0,12.06,2.5Z M7,12.58a.83.83,0,0,1,1.66,0v1.51a.83.83,0,0,1-1.66,0Zm4,0a.83.83,0,0,1,1.65,0v1.51a.83.83,0,1,1-1.65,0Zm3.14-3.21a.81.81,0,0,1,1.13.25,3,3,0,0,1,.45,1.71.83.83,0,0,1-.83.83.81.81,0,0,1-.83-.83,1.3,1.3,0,0,0-.2-.67.8.8,0,0,1,.28-1.3Z"></path></svg>
-                <span>LINE</span>
-            </a>
+            <a href="tel:+66926544915" class="contact-button call-button"><i data-lucide="phone" class="w-4 h-4 mr-2"></i><span>โทร</span></a>
+            <a href="https://line.me/ti/p/aNKFFRAPJu" target="_blank" class="contact-button line-button"><svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M16.4,18.88a7.6,7.6,0,0,1-3.32.76,7.84,7.84,0,0,1-8-7.55,8,8,0,0,1,8.12-8.31,7.94,7.94,0,0,1,3.2.73ZM12.06,2.5A9.55,9.55,0,0,0,3.5,12.24a9.7,9.7,0,0,0,9.47,9.47,9.55,9.55,0,0,0,9.5-9.82A9.55,9.55,0,0,0,12.06,2.5Z M7,12.58a.83.83,0,0,1,1.66,0v1.51a.83.83,0,0,1-1.66,0Zm4,0a.83.83,0,0,1,1.65,0v1.51a.83.83,0,1,1-1.65,0Zm3.14-3.21a.81.81,0,0,1,1.13.25,3,3,0,0,1,.45,1.71.83.83,0,0,1-.83.83.81.81,0,0,1-.83-.83,1.3,1.3,0,0,0-.2-.67.8.8,0,0,1,.28-1.3Z"></path></svg><span>LINE</span></a>
         </div>
     </div>
-
 
     <script>
         lucide.createIcons();
         document.addEventListener('DOMContentLoaded', () => {
             const loadingScreen = document.getElementById('loadingScreen');
-            // FIX: Hide loading screen as soon as the basic document structure is ready.
-            if(loadingScreen) {
-                loadingScreen.classList.add('hidden');
-            }
+            if(loadingScreen) { loadingScreen.classList.add('hidden'); }
 
             const header = document.getElementById('header');
             const logo = document.getElementById('logo');
@@ -433,4 +339,4 @@
         });
     </script>
 </body>
-</html>
+</ht
